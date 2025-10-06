@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrarme como Vendedor - CommerceTrust</title>
+    <link rel="stylesheet" href="style2.css" />
+  </head>
+  <body>
+    <div class="container">
+      <a
+        href="#"
+        class="back-button"
+        onclick="window.history.back(); return false;"
+      >
+        ← Volver al inicio
+      </a>
+
+      <div class="logo">
+        <div class="shield-icon">🛡️</div>
+        <span class="logo-text">CommerceTrust</span>
+      </div>
+
+      <h1>Registro de Vendedor</h1>
+      <p class="subtitle">
+        Comienza a vender con confianza y construye tu reputación
+      </p>
+
+      <div class="benefits-box">
+        <div class="benefits-title">
+          <span>🎯</span> Beneficios como vendedor
+        </div>
+        <ul class="benefits-list">
+          <li>Acceso a miles de compradores verificados</li>
+          <li>Sistema de calificaciones que aumenta tu credibilidad</li>
+          <li>Herramientas para gestionar tus productos</li>
+          <li>Protección y seguridad en transacciones</li>
+        </ul>
+      </div>
+
+      <form id="registrationForm">
+        <h3 style="font-size: 18px; color: #1e293b; margin-bottom: 15px">
+          Información Personal
+        </h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre <span class="required">*</span></label>
+            <input type="text" placeholder="Tu nombre" required />
+          </div>
+
+          <div class="form-group">
+            <label>Apellido <span class="required">*</span></label>
+            <input type="text" placeholder="Tu apellido" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Correo electrónico <span class="required">*</span></label>
+          <input type="email" placeholder="tucorreo@ejemplo.com" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Teléfono <span class="required">*</span></label>
+            <input type="tel" placeholder="+57 300 123 4567" required />
+          </div>
+
+          <div class="form-group">
+            <label>País <span class="required">*</span></label>
+            <select required>
+              <option value="">Selecciona</option>
+              <option value="CO">Colombia</option>
+              <option value="MX">México</option>
+              <option value="AR">Argentina</option>
+              <option value="ES">España</option>
+              <option value="US">Estados Unidos</option>
+              <option value="other">Otro</option>
+            </select>
+          </div>
+        </div>
+
+        <h3 style="font-size: 18px; color: #1e293b; margin: 25px 0 15px">
+          Información del Negocio
+        </h3>
+
+        <div class="form-group">
+          <label
+            >Nombre del negocio/tienda <span class="required">*</span></label
+          >
+          <input type="text" placeholder="Nombre de tu tienda" required />
+        </div>
+
+        <div class="form-group">
+          <label>Categoría de productos <span class="required">*</span></label>
+          <select required>
+            <option value="">Selecciona una categoría</option>
+            <option value="electronics">Electrónica</option>
+            <option value="fashion">Moda y accesorios</option>
+            <option value="home">Hogar y decoración</option>
+            <option value="sports">Deportes y fitness</option>
+            <option value="books">Libros y medios</option>
+            <option value="toys">Juguetes y juegos</option>
+            <option value="food">Alimentos y bebidas</option>
+            <option value="other">Otro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label
+            >Descripción de tu negocio <span class="required">*</span></label
+          >
+          <textarea
+            placeholder="Cuéntanos sobre los productos que vendes y qué hace especial a tu negocio..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Dirección del negocio <span class="required">*</span></label>
+          <input type="text" placeholder="Calle, número, ciudad" required />
+        </div>
+
+        <div class="form-group">
+          <label>Documento de identificación (opcional)</label>
+          <label for="fileUpload" class="file-upload">
+            <input type="file" id="fileUpload" accept=".pdf,.jpg,.jpeg,.png" />
+            <div class="file-upload-icon">📄</div>
+            <div class="file-upload-text">
+              Haz clic para subir tu documento<br />
+              <small>PDF, JPG o PNG (máx. 5MB)</small>
+            </div>
+          </label>
+        </div>
+
+        <h3 style="font-size: 18px; color: #1e293b; margin: 25px 0 15px">
+          Seguridad de la Cuenta
+        </h3>
+
+        <div class="form-group">
+          <label>Nombre de usuario <span class="required">*</span></label>
+          <input
+            type="text"
+            placeholder="Elige un nombre de usuario"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Contraseña <span class="required">*</span></label>
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="password"
+              placeholder="Mínimo 8 caracteres"
+              required
+            />
+            <button
+              type="button"
+              class="toggle-password"
+              onclick="togglePassword()"
+            >
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Confirmar contraseña <span class="required">*</span></label>
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Confirma tu contraseña"
+              required
+            />
+            <button
+              type="button"
+              class="toggle-password"
+              onclick="toggleConfirmPassword()"
+            >
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <span class="info-icon">⚠️</span>
+          <p class="info-text">
+            Como vendedor, serás verificado antes de publicar productos. Este
+            proceso puede tomar 24-48 horas.
+          </p>
+        </div>
+
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" required />
+            <span class="checkbox-text">
+              Acepto los <a href="#terminos">Términos y Condiciones</a>,
+              <a href="#vendedor">Políticas de Vendedor</a> y la
+              <a href="#privacidad">Política de Privacidad</a>
+            </span>
+          </label>
+        </div>
+
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" required />
+            <span class="checkbox-text">
+              Confirmo que la información proporcionada es verídica y asumo la
+              responsabilidad de mantener productos de calidad
+            </span>
+          </label>
+        </div>
+
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" />
+            <span class="checkbox-text">
+              Deseo recibir consejos para vendedores y notificaciones sobre
+              nuevas funcionalidades
+            </span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          Crear mi cuenta de vendedor
+        </button>
+      </form>
+
+      <div class="divider">O regístrate con</div>
+
+      <div class="social-buttons">
+        <button class="btn-social">
+          <span>🔵</span>
+          Continuar con Google
+        </button>
+        <button class="btn-social">
+          <span>📘</span>
+          Continuar con Facebook
+        </button>
+      </div>
+
+      <p class="login-link">
+        ¿Ya tienes una cuenta? <a href="#login">Iniciar Sesión</a>
+      </p>
+    </div>
+    <script src="reg_vendedor.js"></script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Confio</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">← Volver al inicio</a>
+
+        <div class="logo">
+            <div class="shield-icon">🤝</div>
+            <span class="logo-text">Confio</span>
+        </div>
+
+        <h1>Iniciar Sesión</h1>
+        <p class="subtitle">Accede a tu cuenta de Confio</p>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Correo electrónico o usuario</label>
+                <input type="text" id="loginEmail" placeholder="tu@ejemplo.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <div class="password-wrapper">
+                    <input type="password" id="loginPassword" placeholder="Tu contraseña" required>
+                    <button type="button" class="toggle-password" onclick="toggleLoginPassword()">👁️</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Tipo de cuenta</label>
+                <select id="userType" required>
+                    <option value="">Selecciona tu tipo de cuenta</option>
+                    <option value="comprador">🛍️ Comprador</option>
+                    <option value="vendedor">🏪 Vendedor</option>
+                    <option value="admin">⚙️ Administrador</option>
+                </select>
+            </div>
+
+            <div class="form-options">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="rememberMe">
+                    <span class="checkbox-text">Recordar sesión</span>
+                </label>
+                <a href="#olvide" class="forgot-link">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <button type="submit" class="btn-submit">Iniciar Sesión</button>
+        </form>
+
+        <div class="divider">O inicia sesión con</div>
+
+        <div class="social-buttons">
+            <button type="button" class="btn-social" onclick="loginWithGoogle()">
+                <span>🔵</span>
+                Continuar con Google
+            </button>
+            <button type="button" class="btn-social" onclick="loginWithFacebook()">
+                <span>📘</span>
+                Continuar con Facebook
+            </button>
+        </div>
+
+        <p class="login-link">
+            ¿No tienes cuenta? <a href="index.html">Regístrate aquí</a>
+        </p>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

@@ -1,585 +1,688 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel del Administrador - Confio</title>
-    <link rel="stylesheet" href="dashboard_admin.css">
-</head>
-<body>
+    <link rel="stylesheet" href="dashboard_admin.css" />
+  </head>
+  <body>
     <div class="dashboard-container">
-        <!-- Header -->
-        <header class="dashboard-header">
-            <div class="header-left">
-                <div class="logo">
-                    <div class="shield-icon">⚙️</div>
-                    Confio - Panel Admin
-                </div>
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            ☰
+          </button>
+          <div class="logo">
+            <div class="shield-icon">⚙️</div>
+            Confio - Panel Admin
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="admin-actions">
+            <button class="btn-notification">
+              🔔
+              <span class="notification-badge">5</span>
+            </button>
+          </div>
+          <div class="user-menu">
+            <span class="user-name">Nombre Usuario</span>
+            <div class="user-avatar">NU</div>
+            <div class="dropdown-menu">
+              <a href="#perfil">👤 Mi Perfil</a>
+              <a href="#configuracion">⚙️ Configuración</a>
+              <!-- AQUÍ CAMBIAR: -->
+              <a href="#logout" class="logout" onclick="logout()"
+                >🚪 Cerrar Sesión</a
+              >
             </div>
-            <div class="header-right">
-                <div class="admin-actions">
-                    <button class="btn-notification">
-                        🔔
-                        <span class="notification-badge">5</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Navigation Sidebar -->
+      <nav class="sidebar">
+        <ul class="nav-links">
+          <li class="nav-item active">
+            <a href="#dashboard" onclick="showSection('dashboard')">
+              📊 Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#usuarios" onclick="showSection('usuarios')">
+              👥 Usuarios
+              <span class="nav-badge">12</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#productos" onclick="showSection('productos')">
+              📦 Productos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#ventas" onclick="showSection('ventas')"> 💰 Ventas </a>
+          </li>
+          <li class="nav-item">
+            <a href="#reputacion" onclick="showSection('reputacion')">
+              ⭐ Reputación
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#moderacion" onclick="showSection('moderacion')">
+              🛡️ Moderación
+              <span class="nav-badge">8</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#configuracion" onclick="showSection('configuracion')">
+              ⚙️ Configuración
+            </a>
+          </li>
+        </ul>
+
+        <div class="sidebar-footer">
+          <div class="admin-stats">
+            <div class="admin-stat">
+              <span class="stat-label">Sistema</span>
+              <span class="stat-value online">🟢 Online</span>
+            </div>
+            <div class="admin-stat">
+              <span class="stat-label">Última actividad</span>
+              <span class="stat-value">Hace 2 min</span>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content - Dashboard -->
+      <main class="main-content" id="dashboard-section">
+        <div class="welcome-section">
+          <h1>Bienvenido, Administrador 👋</h1>
+          <p>Resumen general de la plataforma Confio</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon total-users">👥</div>
+            <div class="stat-info">
+              <h3>Total Usuarios</h3>
+              <span class="stat-number">2,847</span>
+              <div class="stat-breakdown">
+                <span class="breakdown-item">
+                  <span class="breakdown-dot comprador"></span>
+                  Compradores: 2,154
+                </span>
+                <span class="breakdown-item">
+                  <span class="breakdown-dot vendedor"></span>
+                  Vendedores: 693
+                </span>
+              </div>
+              <span class="stat-change positive">+12% este mes</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon total-products">📦</div>
+            <div class="stat-info">
+              <h3>Total Productos</h3>
+              <span class="stat-number">15,238</span>
+              <div class="stat-breakdown">
+                <span class="breakdown-item">
+                  <span class="breakdown-dot active"></span>
+                  Activos: 14,892
+                </span>
+                <span class="breakdown-item">
+                  <span class="breakdown-dot inactive"></span>
+                  Inactivos: 346
+                </span>
+              </div>
+              <span class="stat-change positive">+8% este mes</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon total-sales">💰</div>
+            <div class="stat-info">
+              <h3>Total Ventas</h3>
+              <span class="stat-number">$1.2M</span>
+              <div class="stat-breakdown">
+                <span class="breakdown-item">
+                  <span class="breakdown-dot completed"></span>
+                  Completadas: 8,742
+                </span>
+                <span class="breakdown-item">
+                  <span class="breakdown-dot pending"></span>
+                  Pendientes: 156
+                </span>
+              </div>
+              <span class="stat-change positive">+15% este mes</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon reputation">⭐</div>
+            <div class="stat-info">
+              <h3>Reputación Global</h3>
+              <span class="stat-number">4.6/5</span>
+              <div class="rating-distribution">
+                <div class="rating-bar">
+                  <span>5★</span>
+                  <div class="bar-container">
+                    <div class="bar-fill" style="width: 65%"></div>
+                  </div>
+                  <span>65%</span>
+                </div>
+                <div class="rating-bar">
+                  <span>4★</span>
+                  <div class="bar-container">
+                    <div class="bar-fill" style="width: 25%"></div>
+                  </div>
+                  <span>25%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>📈 Crecimiento de Usuarios</h3>
+              <select class="chart-filter">
+                <option>Últimos 30 días</option>
+                <option>Últimos 7 días</option>
+                <option>Últimos 90 días</option>
+              </select>
+            </div>
+            <div class="chart-placeholder">
+              <div class="chart-bars">
+                <div class="chart-bar" style="height: 60%">
+                  <span class="bar-label">2.1k</span>
+                </div>
+                <div class="chart-bar" style="height: 75%">
+                  <span class="bar-label">2.3k</span>
+                </div>
+                <div class="chart-bar" style="height: 85%">
+                  <span class="bar-label">2.5k</span>
+                </div>
+                <div class="chart-bar" style="height: 95%">
+                  <span class="bar-label">2.8k</span>
+                </div>
+              </div>
+              <div class="chart-labels">
+                <span>Sem 1</span>
+                <span>Sem 2</span>
+                <span>Sem 3</span>
+                <span>Sem 4</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>💰 Distribución de Ventas</h3>
+              <select class="chart-filter">
+                <option>Por categoría</option>
+                <option>Por vendedor</option>
+                <option>Por región</option>
+              </select>
+            </div>
+            <div class="chart-placeholder">
+              <div class="pie-chart">
+                <div
+                  class="pie-segment electronics"
+                  style="--percentage: 35%"
+                ></div>
+                <div
+                  class="pie-segment fashion"
+                  style="--percentage: 25%"
+                ></div>
+                <div class="pie-segment home" style="--percentage: 20%"></div>
+                <div class="pie-segment other" style="--percentage: 20%"></div>
+              </div>
+              <div class="chart-legend">
+                <div class="legend-item">
+                  <span class="legend-color electronics"></span>
+                  <span>Electrónica: 35%</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color fashion"></span>
+                  <span>Moda: 25%</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color home"></span>
+                  <span>Hogar: 20%</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color other"></span>
+                  <span>Otros: 20%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="recent-activity">
+          <div class="section-header">
+            <h2>🕒 Actividad Reciente</h2>
+            <button class="btn-view-all">Ver todo</button>
+          </div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-icon new-user">👤</div>
+              <div class="activity-content">
+                <p>
+                  <strong>Nuevo usuario registrado:</strong> María González
+                  (Comprador)
+                </p>
+                <span class="activity-time">Hace 5 minutos</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon new-product">📦</div>
+              <div class="activity-content">
+                <p>
+                  <strong>Nuevo producto publicado:</strong> iPhone 14 Pro por
+                  TechStore
+                </p>
+                <span class="activity-time">Hace 12 minutos</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon sale">💰</div>
+              <div class="activity-content">
+                <p><strong>Venta completada:</strong> $245.99 - Zapatos Nike</p>
+                <span class="activity-time">Hace 25 minutos</span>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon report">⚠️</div>
+              <div class="activity-content">
+                <p>
+                  <strong>Reporte recibido:</strong> Usuario "Juan123" por
+                  comportamiento sospechoso
+                </p>
+                <span class="activity-time">Hace 1 hora</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Main Content - Usuarios -->
+      <main class="main-content" id="usuarios-section" style="display: none">
+        <div class="section-header">
+          <h1>👥 Gestión de Usuarios</h1>
+          <div class="header-actions">
+            <input
+              type="text"
+              placeholder="Buscar usuario..."
+              class="search-input"
+            />
+            <select class="filter-select">
+              <option>Todos los usuarios</option>
+              <option>Compradores</option>
+              <option>Vendedores</option>
+              <option>Suspendidos</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="users-table-container">
+          <table class="users-table">
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Tipo</th>
+                <th>Registro</th>
+                <th>Estado</th>
+                <th>Reputación</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="user-cell">
+                    <div class="user-avatar">MG</div>
+                    <div class="user-info">
+                      <span class="user-name">María González</span>
+                      <span class="user-email">maria@email.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="user-type comprador">Comprador</span></td>
+                <td>15 Dic, 2024</td>
+                <td><span class="status-badge active">Activo</span></td>
+                <td>
+                  <div class="reputation-score">
+                    <span class="rating">4.8</span>
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button
+                      class="btn-action view"
+                      onclick="viewUserDetails(1)"
+                    >
+                      👁️
                     </button>
+                    <button class="btn-action suspend" onclick="suspendUser(1)">
+                      ⏸️
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="user-cell">
+                    <div class="user-avatar">TS</div>
+                    <div class="user-info">
+                      <span class="user-name">TechStore</span>
+                      <span class="user-email">tech@store.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="user-type vendedor">Vendedor</span></td>
+                <td>10 Nov, 2024</td>
+                <td><span class="status-badge active">Activo</span></td>
+                <td>
+                  <div class="reputation-score">
+                    <span class="rating">4.6</span>
+                    <span class="stars">⭐⭐⭐⭐⭐</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button
+                      class="btn-action view"
+                      onclick="viewUserDetails(2)"
+                    >
+                      👁️
+                    </button>
+                    <button class="btn-action suspend" onclick="suspendUser(2)">
+                      ⏸️
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="user-cell">
+                    <div class="user-avatar">JR</div>
+                    <div class="user-info">
+                      <span class="user-name">Juan Rodríguez</span>
+                      <span class="user-email">juan@email.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="user-type comprador">Comprador</span></td>
+                <td>05 Dic, 2024</td>
+                <td><span class="status-badge suspended">Suspendido</span></td>
+                <td>
+                  <div class="reputation-score">
+                    <span class="rating">2.1</span>
+                    <span class="stars">⭐⭐</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button
+                      class="btn-action view"
+                      onclick="viewUserDetails(3)"
+                    >
+                      👁️
+                    </button>
+                    <button
+                      class="btn-action activate"
+                      onclick="activateUser(3)"
+                    >
+                      ▶️
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+      <!-- Main Content - Moderación -->
+      <main class="main-content" id="moderacion-section" style="display: none">
+        <div class="section-header">
+          <h1>🛡️ Centro de Moderación</h1>
+          <div class="moderation-stats">
+            <div class="mod-stat">
+              <span class="mod-stat-number">8</span>
+              <span class="mod-stat-label">Reportes Pendientes</span>
+            </div>
+            <div class="mod-stat">
+              <span class="mod-stat-number">3</span>
+              <span class="mod-stat-label">Usuarios Sospechosos</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="moderation-tabs">
+          <button
+            class="tab-button active"
+            onclick="openModerationTab('reports')"
+          >
+            📋 Reportes
+          </button>
+          <button class="tab-button" onclick="openModerationTab('suspicious')">
+            👁️ Usuarios Sospechosos
+          </button>
+          <button class="tab-button" onclick="openModerationTab('reviews')">
+            ⭐ Calificaciones
+          </button>
+        </div>
+
+        <div class="moderation-content">
+          <!-- Reportes Pendientes -->
+          <div id="reports-tab" class="tab-content active">
+            <div class="reports-list">
+              <div class="report-card">
+                <div class="report-header">
+                  <span class="report-id">#REP-7842</span>
+                  <span class="report-date">Hoy, 14:30</span>
                 </div>
-                <div class="user-menu">
-                    <span class="user-name">Nombre Usuario</span>
-                    <div class="user-avatar">NU</div>
-                    <div class="dropdown-menu">
-                        <a href="#perfil">👤 Mi Perfil</a>
-                        <a href="#configuracion">⚙️ Configuración</a>
-                        <!-- AQUÍ CAMBIAR: -->
-                        <a href="#logout" class="logout" onclick="logout()">🚪 Cerrar Sesión</a>
-                    </div>
+                <div class="report-details">
+                  <div class="reported-user">
+                    <strong>Usuario reportado:</strong> Juan123
+                  </div>
+                  <div class="report-reason">
+                    <strong>Motivo:</strong> Comportamiento sospechoso -
+                    Múltiples cuentas
+                  </div>
+                  <div class="report-description">
+                    <strong>Descripción:</strong> Usuario crea múltiples cuentas
+                    para evadir bloqueos anteriores
+                  </div>
                 </div>
-            </div>
-        </header>
-
-        <!-- Navigation Sidebar -->
-        <nav class="sidebar">
-            <ul class="nav-links">
-                <li class="nav-item active">
-                    <a href="#dashboard" onclick="showSection('dashboard')">
-                        📊 Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#usuarios" onclick="showSection('usuarios')">
-                        👥 Usuarios
-                        <span class="nav-badge">12</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#productos" onclick="showSection('productos')">
-                        📦 Productos
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#ventas" onclick="showSection('ventas')">
-                        💰 Ventas
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#reputacion" onclick="showSection('reputacion')">
-                        ⭐ Reputación
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#moderacion" onclick="showSection('moderacion')">
-                        🛡️ Moderación
-                        <span class="nav-badge">8</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#configuracion" onclick="showSection('configuracion')">
-                        ⚙️ Configuración
-                    </a>
-                </li>
-            </ul>
-            
-            <div class="sidebar-footer">
-                <div class="admin-stats">
-                    <div class="admin-stat">
-                        <span class="stat-label">Sistema</span>
-                        <span class="stat-value online">🟢 Online</span>
-                    </div>
-                    <div class="admin-stat">
-                        <span class="stat-label">Última actividad</span>
-                        <span class="stat-value">Hace 2 min</span>
-                    </div>
+                <div class="report-actions">
+                  <button class="btn-danger" onclick="blockUser('Juan123')">
+                    🚫 Bloquear Usuario
+                  </button>
+                  <button
+                    class="btn-secondary"
+                    onclick="dismissReport('REP-7842')"
+                  >
+                    ✅ Desestimar
+                  </button>
+                  <button
+                    class="btn-primary"
+                    onclick="investigateReport('REP-7842')"
+                  >
+                    🔍 Investigar
+                  </button>
                 </div>
-            </div>
-        </nav>
+              </div>
 
-        <!-- Main Content - Dashboard -->
-        <main class="main-content" id="dashboard-section">
-            <div class="welcome-section">
-                <h1>Bienvenido, Administrador 👋</h1>
-                <p>Resumen general de la plataforma Confio</p>
-            </div>
-
-            <!-- Stats Grid -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon total-users">👥</div>
-                    <div class="stat-info">
-                        <h3>Total Usuarios</h3>
-                        <span class="stat-number">2,847</span>
-                        <div class="stat-breakdown">
-                            <span class="breakdown-item">
-                                <span class="breakdown-dot comprador"></span>
-                                Compradores: 2,154
-                            </span>
-                            <span class="breakdown-item">
-                                <span class="breakdown-dot vendedor"></span>
-                                Vendedores: 693
-                            </span>
-                        </div>
-                        <span class="stat-change positive">+12% este mes</span>
-                    </div>
+              <div class="report-card">
+                <div class="report-header">
+                  <span class="report-id">#REP-7841</span>
+                  <span class="report-date">Ayer, 16:45</span>
                 </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon total-products">📦</div>
-                    <div class="stat-info">
-                        <h3>Total Productos</h3>
-                        <span class="stat-number">15,238</span>
-                        <div class="stat-breakdown">
-                            <span class="breakdown-item">
-                                <span class="breakdown-dot active"></span>
-                                Activos: 14,892
-                            </span>
-                            <span class="breakdown-item">
-                                <span class="breakdown-dot inactive"></span>
-                                Inactivos: 346
-                            </span>
-                        </div>
-                        <span class="stat-change positive">+8% este mes</span>
-                    </div>
+                <div class="report-details">
+                  <div class="reported-user">
+                    <strong>Usuario reportado:</strong> TechStore
+                  </div>
+                  <div class="report-reason">
+                    <strong>Motivo:</strong> Producto falsificado
+                  </div>
+                  <div class="report-description">
+                    <strong>Descripción:</strong> Vende productos electrónicos
+                    que parecen ser falsificados
+                  </div>
                 </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon total-sales">💰</div>
-                    <div class="stat-info">
-                        <h3>Total Ventas</h3>
-                        <span class="stat-number">$1.2M</span>
-                        <div class="stat-breakdown">
-                            <span class="breakdown-item">
-                                <span class="breakdown-dot completed"></span>
-                                Completadas: 8,742
-                            </span>
-                            <span class="breakdown-item">
-                                <span class="breakdown-dot pending"></span>
-                                Pendientes: 156
-                            </span>
-                        </div>
-                        <span class="stat-change positive">+15% este mes</span>
-                    </div>
+                <div class="report-actions">
+                  <button
+                    class="btn-warning"
+                    onclick="suspendUserTemporary('TechStore')"
+                  >
+                    ⏸️ Suspender Temporalmente
+                  </button>
+                  <button
+                    class="btn-secondary"
+                    onclick="dismissReport('REP-7841')"
+                  >
+                    ✅ Desestimar
+                  </button>
+                  <button
+                    class="btn-primary"
+                    onclick="investigateReport('REP-7841')"
+                  >
+                    🔍 Investigar
+                  </button>
                 </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon reputation">⭐</div>
-                    <div class="stat-info">
-                        <h3>Reputación Global</h3>
-                        <span class="stat-number">4.6/5</span>
-                        <div class="rating-distribution">
-                            <div class="rating-bar">
-                                <span>5★</span>
-                                <div class="bar-container">
-                                    <div class="bar-fill" style="width: 65%"></div>
-                                </div>
-                                <span>65%</span>
-                            </div>
-                            <div class="rating-bar">
-                                <span>4★</span>
-                                <div class="bar-container">
-                                    <div class="bar-fill" style="width: 25%"></div>
-                                </div>
-                                <span>25%</span>
-                            </div>
-                        </div>
-                    </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Usuarios Sospechosos -->
+          <div id="suspicious-tab" class="tab-content">
+            <div class="suspicious-users-list">
+              <div class="suspicious-user-card">
+                <div class="user-info">
+                  <div class="user-avatar">JR</div>
+                  <div class="user-details">
+                    <h4>Juan Rodríguez</h4>
+                    <p>3 reportes • Reputación: 2.1/5</p>
+                    <div class="risk-indicator high-risk">🔴 Alto Riesgo</div>
+                  </div>
                 </div>
-            </div>
-
-            <!-- Charts Section -->
-            <div class="charts-section">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <h3>📈 Crecimiento de Usuarios</h3>
-                        <select class="chart-filter">
-                            <option>Últimos 30 días</option>
-                            <option>Últimos 7 días</option>
-                            <option>Últimos 90 días</option>
-                        </select>
-                    </div>
-                    <div class="chart-placeholder">
-                        <div class="chart-bars">
-                            <div class="chart-bar" style="height: 60%">
-                                <span class="bar-label">2.1k</span>
-                            </div>
-                            <div class="chart-bar" style="height: 75%">
-                                <span class="bar-label">2.3k</span>
-                            </div>
-                            <div class="chart-bar" style="height: 85%">
-                                <span class="bar-label">2.5k</span>
-                            </div>
-                            <div class="chart-bar" style="height: 95%">
-                                <span class="bar-label">2.8k</span>
-                            </div>
-                        </div>
-                        <div class="chart-labels">
-                            <span>Sem 1</span>
-                            <span>Sem 2</span>
-                            <span>Sem 3</span>
-                            <span>Sem 4</span>
-                        </div>
-                    </div>
+                <div class="suspicious-actions">
+                  <button
+                    class="btn-danger"
+                    onclick="blockUser('Juan Rodríguez')"
+                  >
+                    🚫 Bloquear Permanentemente
+                  </button>
+                  <button
+                    class="btn-warning"
+                    onclick="suspendUserTemporary('Juan Rodríguez')"
+                  >
+                    ⏸️ Suspender 30 días
+                  </button>
                 </div>
+              </div>
+            </div>
+          </div>
 
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <h3>💰 Distribución de Ventas</h3>
-                        <select class="chart-filter">
-                            <option>Por categoría</option>
-                            <option>Por vendedor</option>
-                            <option>Por región</option>
-                        </select>
-                    </div>
-                    <div class="chart-placeholder">
-                        <div class="pie-chart">
-                            <div class="pie-segment electronics" style="--percentage: 35%;"></div>
-                            <div class="pie-segment fashion" style="--percentage: 25%;"></div>
-                            <div class="pie-segment home" style="--percentage: 20%;"></div>
-                            <div class="pie-segment other" style="--percentage: 20%;"></div>
-                        </div>
-                        <div class="chart-legend">
-                            <div class="legend-item">
-                                <span class="legend-color electronics"></span>
-                                <span>Electrónica: 35%</span>
-                            </div>
-                            <div class="legend-item">
-                                <span class="legend-color fashion"></span>
-                                <span>Moda: 25%</span>
-                            </div>
-                            <div class="legend-item">
-                                <span class="legend-color home"></span>
-                                <span>Hogar: 20%</span>
-                            </div>
-                            <div class="legend-item">
-                                <span class="legend-color other"></span>
-                                <span>Otros: 20%</span>
-                            </div>
-                        </div>
-                    </div>
+          <!-- Calificaciones -->
+          <div id="reviews-tab" class="tab-content">
+            <div class="reviews-list">
+              <div class="review-card questionable">
+                <div class="review-header">
+                  <span class="reviewer">Usuario: Ana123</span>
+                  <span class="review-date">15 Dic, 2024</span>
                 </div>
-            </div>
-
-            <!-- Recent Activity -->
-            <div class="recent-activity">
-                <div class="section-header">
-                    <h2>🕒 Actividad Reciente</h2>
-                    <button class="btn-view-all">Ver todo</button>
+                <div class="review-content">
+                  <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                  <p class="review-text">"Excelente producto, todo perfecto"</p>
+                  <div class="review-meta">
+                    <span>Producto: iPhone 14 Pro</span>
+                    <span>Vendedor: TechStore</span>
+                  </div>
                 </div>
-                <div class="activity-list">
-                    <div class="activity-item">
-                        <div class="activity-icon new-user">👤</div>
-                        <div class="activity-content">
-                            <p><strong>Nuevo usuario registrado:</strong> María González (Comprador)</p>
-                            <span class="activity-time">Hace 5 minutos</span>
-                        </div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon new-product">📦</div>
-                        <div class="activity-content">
-                            <p><strong>Nuevo producto publicado:</strong> iPhone 14 Pro por TechStore</p>
-                            <span class="activity-time">Hace 12 minutos</span>
-                        </div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon sale">💰</div>
-                        <div class="activity-content">
-                            <p><strong>Venta completada:</strong> $245.99 - Zapatos Nike</p>
-                            <span class="activity-time">Hace 25 minutos</span>
-                        </div>
-                    </div>
-                    <div class="activity-item">
-                        <div class="activity-icon report">⚠️</div>
-                        <div class="activity-content">
-                            <p><strong>Reporte recibido:</strong> Usuario "Juan123" por comportamiento sospechoso</p>
-                            <span class="activity-time">Hace 1 hora</span>
-                        </div>
-                    </div>
+                <div class="review-flags">
+                  <span class="flag">🚩 Posible falsa</span>
+                  <span class="flag">⚠️ Patrón sospechoso</span>
                 </div>
-            </div>
-        </main>
-
-        <!-- Main Content - Usuarios -->
-        <main class="main-content" id="usuarios-section" style="display: none;">
-            <div class="section-header">
-                <h1>👥 Gestión de Usuarios</h1>
-                <div class="header-actions">
-                    <input type="text" placeholder="Buscar usuario..." class="search-input">
-                    <select class="filter-select">
-                        <option>Todos los usuarios</option>
-                        <option>Compradores</option>
-                        <option>Vendedores</option>
-                        <option>Suspendidos</option>
-                    </select>
+                <div class="review-actions">
+                  <button class="btn-danger" onclick="deleteReview(1)">
+                    🗑️ Eliminar Reseña
+                  </button>
+                  <button class="btn-secondary" onclick="markReviewValid(1)">
+                    ✅ Marcar como Válida
+                  </button>
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
+      </main>
 
-            <div class="users-table-container">
-                <table class="users-table">
-                    <thead>
-                        <tr>
-                            <th>Usuario</th>
-                            <th>Tipo</th>
-                            <th>Registro</th>
-                            <th>Estado</th>
-                            <th>Reputación</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="user-avatar">MG</div>
-                                    <div class="user-info">
-                                        <span class="user-name">María González</span>
-                                        <span class="user-email">maria@email.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="user-type comprador">Comprador</span></td>
-                            <td>15 Dic, 2024</td>
-                            <td><span class="status-badge active">Activo</span></td>
-                            <td>
-                                <div class="reputation-score">
-                                    <span class="rating">4.8</span>
-                                    <span class="stars">⭐⭐⭐⭐⭐</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn-action view" onclick="viewUserDetails(1)">👁️</button>
-                                    <button class="btn-action suspend" onclick="suspendUser(1)">⏸️</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="user-avatar">TS</div>
-                                    <div class="user-info">
-                                        <span class="user-name">TechStore</span>
-                                        <span class="user-email">tech@store.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="user-type vendedor">Vendedor</span></td>
-                            <td>10 Nov, 2024</td>
-                            <td><span class="status-badge active">Activo</span></td>
-                            <td>
-                                <div class="reputation-score">
-                                    <span class="rating">4.6</span>
-                                    <span class="stars">⭐⭐⭐⭐⭐</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn-action view" onclick="viewUserDetails(2)">👁️</button>
-                                    <button class="btn-action suspend" onclick="suspendUser(2)">⏸️</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="user-avatar">JR</div>
-                                    <div class="user-info">
-                                        <span class="user-name">Juan Rodríguez</span>
-                                        <span class="user-email">juan@email.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="user-type comprador">Comprador</span></td>
-                            <td>05 Dic, 2024</td>
-                            <td><span class="status-badge suspended">Suspendido</span></td>
-                            <td>
-                                <div class="reputation-score">
-                                    <span class="rating">2.1</span>
-                                    <span class="stars">⭐⭐</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn-action view" onclick="viewUserDetails(3)">👁️</button>
-                                    <button class="btn-action activate" onclick="activateUser(3)">▶️</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </main>
+      <!-- Secciones adicionales (simplificadas) -->
+      <main class="main-content" id="productos-section" style="display: none">
+        <div class="section-header">
+          <h1>📦 Gestión de Productos</h1>
+          <p>Gestión completa del catálogo de productos</p>
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">📦</div>
+          <h3>Módulo de Productos</h3>
+          <p>Gestiona todos los productos de la plataforma</p>
+        </div>
+      </main>
 
-        <!-- Main Content - Moderación -->
-        <main class="main-content" id="moderacion-section" style="display: none;">
-            <div class="section-header">
-                <h1>🛡️ Centro de Moderación</h1>
-                <div class="moderation-stats">
-                    <div class="mod-stat">
-                        <span class="mod-stat-number">8</span>
-                        <span class="mod-stat-label">Reportes Pendientes</span>
-                    </div>
-                    <div class="mod-stat">
-                        <span class="mod-stat-number">3</span>
-                        <span class="mod-stat-label">Usuarios Sospechosos</span>
-                    </div>
-                </div>
-            </div>
+      <main class="main-content" id="ventas-section" style="display: none">
+        <div class="section-header">
+          <h1>💰 Reportes de Ventas</h1>
+          <p>Análisis detallado de ventas y transacciones</p>
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">💰</div>
+          <h3>Módulo de Ventas</h3>
+          <p>Reportes y análisis de todas las transacciones</p>
+        </div>
+      </main>
 
-            <div class="moderation-tabs">
-                <button class="tab-button active" onclick="openModerationTab('reports')">📋 Reportes</button>
-                <button class="tab-button" onclick="openModerationTab('suspicious')">👁️ Usuarios Sospechosos</button>
-                <button class="tab-button" onclick="openModerationTab('reviews')">⭐ Calificaciones</button>
-            </div>
+      <main class="main-content" id="reputacion-section" style="display: none">
+        <div class="section-header">
+          <h1>⭐ Sistema de Reputación</h1>
+          <p>Gestión y análisis del sistema de reputación</p>
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">⭐</div>
+          <h3>Módulo de Reputación</h3>
+          <p>Analiza y gestiona el sistema de reputación global</p>
+        </div>
+      </main>
 
-            <div class="moderation-content">
-                <!-- Reportes Pendientes -->
-                <div id="reports-tab" class="tab-content active">
-                    <div class="reports-list">
-                        <div class="report-card">
-                            <div class="report-header">
-                                <span class="report-id">#REP-7842</span>
-                                <span class="report-date">Hoy, 14:30</span>
-                            </div>
-                            <div class="report-details">
-                                <div class="reported-user">
-                                    <strong>Usuario reportado:</strong> Juan123
-                                </div>
-                                <div class="report-reason">
-                                    <strong>Motivo:</strong> Comportamiento sospechoso - Múltiples cuentas
-                                </div>
-                                <div class="report-description">
-                                    <strong>Descripción:</strong> Usuario crea múltiples cuentas para evadir bloqueos anteriores
-                                </div>
-                            </div>
-                            <div class="report-actions">
-                                <button class="btn-danger" onclick="blockUser('Juan123')">🚫 Bloquear Usuario</button>
-                                <button class="btn-secondary" onclick="dismissReport('REP-7842')">✅ Desestimar</button>
-                                <button class="btn-primary" onclick="investigateReport('REP-7842')">🔍 Investigar</button>
-                            </div>
-                        </div>
-
-                        <div class="report-card">
-                            <div class="report-header">
-                                <span class="report-id">#REP-7841</span>
-                                <span class="report-date">Ayer, 16:45</span>
-                            </div>
-                            <div class="report-details">
-                                <div class="reported-user">
-                                    <strong>Usuario reportado:</strong> TechStore
-                                </div>
-                                <div class="report-reason">
-                                    <strong>Motivo:</strong> Producto falsificado
-                                </div>
-                                <div class="report-description">
-                                    <strong>Descripción:</strong> Vende productos electrónicos que parecen ser falsificados
-                                </div>
-                            </div>
-                            <div class="report-actions">
-                                <button class="btn-warning" onclick="suspendUserTemporary('TechStore')">⏸️ Suspender Temporalmente</button>
-                                <button class="btn-secondary" onclick="dismissReport('REP-7841')">✅ Desestimar</button>
-                                <button class="btn-primary" onclick="investigateReport('REP-7841')">🔍 Investigar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Usuarios Sospechosos -->
-                <div id="suspicious-tab" class="tab-content">
-                    <div class="suspicious-users-list">
-                        <div class="suspicious-user-card">
-                            <div class="user-info">
-                                <div class="user-avatar">JR</div>
-                                <div class="user-details">
-                                    <h4>Juan Rodríguez</h4>
-                                    <p>3 reportes • Reputación: 2.1/5</p>
-                                    <div class="risk-indicator high-risk">🔴 Alto Riesgo</div>
-                                </div>
-                            </div>
-                            <div class="suspicious-actions">
-                                <button class="btn-danger" onclick="blockUser('Juan Rodríguez')">🚫 Bloquear Permanentemente</button>
-                                <button class="btn-warning" onclick="suspendUserTemporary('Juan Rodríguez')">⏸️ Suspender 30 días</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calificaciones -->
-                <div id="reviews-tab" class="tab-content">
-                    <div class="reviews-list">
-                        <div class="review-card questionable">
-                            <div class="review-header">
-                                <span class="reviewer">Usuario: Ana123</span>
-                                <span class="review-date">15 Dic, 2024</span>
-                            </div>
-                            <div class="review-content">
-                                <div class="review-rating">⭐⭐⭐⭐⭐</div>
-                                <p class="review-text">"Excelente producto, todo perfecto"</p>
-                                <div class="review-meta">
-                                    <span>Producto: iPhone 14 Pro</span>
-                                    <span>Vendedor: TechStore</span>
-                                </div>
-                            </div>
-                            <div class="review-flags">
-                                <span class="flag">🚩 Posible falsa</span>
-                                <span class="flag">⚠️ Patrón sospechoso</span>
-                            </div>
-                            <div class="review-actions">
-                                <button class="btn-danger" onclick="deleteReview(1)">🗑️ Eliminar Reseña</button>
-                                <button class="btn-secondary" onclick="markReviewValid(1)">✅ Marcar como Válida</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- Secciones adicionales (simplificadas) -->
-        <main class="main-content" id="productos-section" style="display: none;">
-            <div class="section-header">
-                <h1>📦 Gestión de Productos</h1>
-                <p>Gestión completa del catálogo de productos</p>
-            </div>
-            <div class="empty-state">
-                <div class="empty-icon">📦</div>
-                <h3>Módulo de Productos</h3>
-                <p>Gestiona todos los productos de la plataforma</p>
-            </div>
-        </main>
-
-        <main class="main-content" id="ventas-section" style="display: none;">
-            <div class="section-header">
-                <h1>💰 Reportes de Ventas</h1>
-                <p>Análisis detallado de ventas y transacciones</p>
-            </div>
-            <div class="empty-state">
-                <div class="empty-icon">💰</div>
-                <h3>Módulo de Ventas</h3>
-                <p>Reportes y análisis de todas las transacciones</p>
-            </div>
-        </main>
-
-        <main class="main-content" id="reputacion-section" style="display: none;">
-            <div class="section-header">
-                <h1>⭐ Sistema de Reputación</h1>
-                <p>Gestión y análisis del sistema de reputación</p>
-            </div>
-            <div class="empty-state">
-                <div class="empty-icon">⭐</div>
-                <h3>Módulo de Reputación</h3>
-                <p>Analiza y gestiona el sistema de reputación global</p>
-            </div>
-        </main>
-
-        <main class="main-content" id="configuracion-section" style="display: none;">
-            <div class="section-header">
-                <h1>⚙️ Configuración del Sistema</h1>
-                <p>Configuración global de la plataforma</p>
-            </div>
-            <div class="empty-state">
-                <div class="empty-icon">⚙️</div>
-                <h3>Configuración del Sistema</h3>
-                <p>Configura los parámetros globales de Confio</p>
-            </div>
-        </main>
+      <main
+        class="main-content"
+        id="configuracion-section"
+        style="display: none"
+      >
+        <div class="section-header">
+          <h1>⚙️ Configuración del Sistema</h1>
+          <p>Configuración global de la plataforma</p>
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">⚙️</div>
+          <h3>Configuración del Sistema</h3>
+          <p>Configura los parámetros globales de Confio</p>
+        </div>
+      </main>
     </div>
 
     <script src="dashboard_admin.js"></script>
-</body>
+  </body>
 </html>

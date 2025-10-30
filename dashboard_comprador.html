@@ -1,374 +1,478 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel del Comprador - Confio</title>
-    <link rel="stylesheet" href="dashboard_comprador.css">
-</head>
-<body>
+    <link rel="stylesheet" href="dashboard_comprador.css" />
+  </head>
+  <body>
     <div class="dashboard-container">
-        <!-- Header -->
-        <header class="dashboard-header">
-            <div class="header-left">
-                <div class="logo">
-                    <div class="shield-icon">🤝</div>
-                    Confio - Panel Comprador
-                </div>
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            ☰
+          </button>
+          <div class="logo">
+            <div class="shield-icon">🤝</div>
+            Confio - Panel Comprador
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="user-menu">
+            <span class="user-name">Nombre Usuario</span>
+            <div class="user-avatar">NU</div>
+            <div class="dropdown-menu">
+              <a href="#perfil">👤 Mi Perfil</a>
+              <a href="#configuracion">⚙️ Configuración</a>
+              <!-- AQUÍ CAMBIAR: -->
+              <a href="#logout" class="logout" onclick="logout()"
+                >🚪 Cerrar Sesión</a
+              >
             </div>
-            <div class="header-right">
-                <div class="user-menu">
-                    <span class="user-name">Nombre Usuario</span>
-                    <div class="user-avatar">NU</div>
-                    <div class="dropdown-menu">
-                        <a href="#perfil">👤 Mi Perfil</a>
-                        <a href="#configuracion">⚙️ Configuración</a>
-                        <!-- AQUÍ CAMBIAR: -->
-                        <a href="#logout" class="logout" onclick="logout()">🚪 Cerrar Sesión</a>
-                    </div>
-                </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Navigation Sidebar -->
+      <nav class="sidebar">
+        <ul class="nav-links">
+          <li class="nav-item active">
+            <a href="#catalogo" onclick="showSection('catalogo')">
+              🛍️ Catálogo
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#pedidos" onclick="showSection('pedidos')">
+              📦 Mis Pedidos
+              <span class="nav-badge">3</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#favoritos" onclick="showSection('favoritos')">
+              ❤️ Favoritos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#configuracion" onclick="showSection('configuracion')">
+              ⚙️ Configuración
+            </a>
+          </li>
+        </ul>
+
+        <div class="sidebar-footer">
+          <div class="buyer-stats">
+            <div class="buyer-stat">
+              <span class="stat-label">Cliente desde</span>
+              <span class="stat-value">2024</span>
             </div>
-        </header>
-
-        <!-- Navigation Sidebar -->
-        <nav class="sidebar">
-            <ul class="nav-links">
-                <li class="nav-item active">
-                    <a href="#catalogo" onclick="showSection('catalogo')">
-                        🛍️ Catálogo
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#pedidos" onclick="showSection('pedidos')">
-                        📦 Mis Pedidos
-                        <span class="nav-badge">3</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#favoritos" onclick="showSection('favoritos')">
-                        ❤️ Favoritos
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#configuracion" onclick="showSection('configuracion')">
-                        ⚙️ Configuración
-                    </a>
-                </li>
-            </ul>
-            
-            <div class="sidebar-footer">
-                <div class="buyer-stats">
-                    <div class="buyer-stat">
-                        <span class="stat-label">Cliente desde</span>
-                        <span class="stat-value">2024</span>
-                    </div>
-                    <div class="buyer-stat">
-                        <span class="stat-label">Compras</span>
-                        <span class="stat-value">12</span>
-                    </div>
-                </div>
+            <div class="buyer-stat">
+              <span class="stat-label">Compras</span>
+              <span class="stat-value">12</span>
             </div>
-        </nav>
+          </div>
+        </div>
+      </nav>
 
-        <!-- Main Content - Catálogo -->
-        <main class="main-content" id="catalogo-section">
-            <!-- Filtros -->
-            <section class="filters-section">
-                <div class="filters-grid">
-                    <div class="filter-group">
-                        <label for="categoryFilter">Categoría</label>
-                        <select id="categoryFilter">
-                            <option value="all">Todas las categorías</option>
-                            <option value="electronica">📱 Electrónica</option>
-                            <option value="ropa">👕 Ropa</option>
-                            <option value="hogar">🏠 Hogar</option>
-                            <option value="deportes">⚽ Deportes</option>
-                            <option value="libros">📚 Libros</option>
-                        </select>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label for="priceFilter">Precio máximo</label>
-                        <select id="priceFilter">
-                            <option value="all">Cualquier precio</option>
-                            <option value="50">Hasta $50</option>
-                            <option value="100">Hasta $100</option>
-                            <option value="200">Hasta $200</option>
-                            <option value="500">Hasta $500</option>
-                        </select>
-                    </div>
-                    
-                    <div class="filter-group">
-                        <label for="sortFilter">Ordenar por</label>
-                        <select id="sortFilter">
-                            <option value="popular">Más populares</option>
-                            <option value="price_asc">Precio: Menor a mayor</option>
-                            <option value="price_desc">Precio: Mayor a menor</option>
-                            <option value="newest">Más recientes</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Catálogo de Productos -->
-            <div class="catalog-header">
-                <h1>🛍️ Catálogo de Productos</h1>
-                <span class="products-count">Mostrando 8 productos</span>
+      <!-- Main Content - Catálogo -->
+      <main class="main-content" id="catalogo-section">
+        <!-- Filtros -->
+        <section class="filters-section">
+          <div class="filters-grid">
+            <div class="filter-group">
+              <label for="categoryFilter">Categoría</label>
+              <select id="categoryFilter">
+                <option value="all">Todas las categorías</option>
+                <option value="electronica">📱 Electrónica</option>
+                <option value="ropa">👕 Ropa</option>
+                <option value="hogar">🏠 Hogar</option>
+                <option value="deportes">⚽ Deportes</option>
+                <option value="libros">📚 Libros</option>
+              </select>
             </div>
 
-            <div class="products-grid">
-                <!-- Producto 1 -->
-                <div class="product-card" onclick="openProductModal(1)">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Zapatos Deportivos">
-                        <div class="product-badge">Nuevo</div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">👟 Calzado Deportivo</div>
-                        <h3 class="product-title">Zapatos Running Nike Air Max</h3>
-                        <p class="product-description">Zapatos deportivos ideales para running con tecnología de amortiguación Air Max.</p>
-                        <div class="product-footer">
-                            <div class="product-price">$89.99</div>
-                            <div class="product-rating">⭐ 4.8 (124)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Producto 2 -->
-                <div class="product-card" onclick="openProductModal(2)">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="iPhone">
-                        <div class="product-badge">Popular</div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">📱 Electrónica</div>
-                        <h3 class="product-title">iPhone 14 Pro Max 256GB</h3>
-                        <p class="product-description">El último iPhone con cámara profesional, pantalla Always-On y chip A16 Bionic.</p>
-                        <div class="product-footer">
-                            <div class="product-price">$1,199.99</div>
-                            <div class="product-rating">⭐ 4.9 (89)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Producto 3 -->
-                <div class="product-card" onclick="openProductModal(3)">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Auriculares">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">🎧 Audio</div>
-                        <h3 class="product-title">Auriculares Sony WH-1000XM4</h3>
-                        <p class="product-description">Auriculares inalámbricos con cancelación de ruido líder en la industria.</p>
-                        <div class="product-footer">
-                            <div class="product-price">$349.99</div>
-                            <div class="product-rating">⭐ 4.7 (203)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Producto 4 -->
-                <div class="product-card" onclick="openProductModal(4)">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Libro">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">📚 Libros</div>
-                        <h3 class="product-title">Hábitos Atómicos - James Clear</h3>
-                        <p class="product-description">Un método fácil y probado para construir buenos hábitos y dejar los malos.</p>
-                        <div class="product-footer">
-                            <div class="product-price">$24.99</div>
-                            <div class="product-rating">⭐ 4.8 (567)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- Main Content - Pedidos -->
-        <main class="main-content" id="pedidos-section" style="display: none;">
-            <div class="section-header">
-                <h1>📦 Mis Pedidos</h1>
-                <span class="orders-count">3 pedidos encontrados</span>
+            <div class="filter-group">
+              <label for="priceFilter">Precio máximo</label>
+              <select id="priceFilter">
+                <option value="all">Cualquier precio</option>
+                <option value="50">Hasta $50</option>
+                <option value="100">Hasta $100</option>
+                <option value="200">Hasta $200</option>
+                <option value="500">Hasta $500</option>
+              </select>
             </div>
 
-            <div class="orders-list">
-                <!-- Pedido Entregado -->
-                <div class="order-item delivered">
-                    <div class="order-status-icon delivered">✅</div>
-                    <div class="order-details">
-                        <div class="order-product">Zapatos Running Nike Air Max</div>
-                        <div class="order-date">Pedido: 15 Dic, 2024 • Entregado: 18 Dic, 2024</div>
-                        <span class="order-status delivered">Entregado</span>
-                    </div>
-                    <div class="order-actions">
-                        <button class="btn-action btn-secondary" onclick="viewOrderDetails(1)">Ver Detalles</button>
-                        <button class="btn-action btn-primary" onclick="buyAgain(1)">Comprar Again</button>
-                    </div>
-                </div>
+            <div class="filter-group">
+              <label for="sortFilter">Ordenar por</label>
+              <select id="sortFilter">
+                <option value="popular">Más populares</option>
+                <option value="price_asc">Precio: Menor a mayor</option>
+                <option value="price_desc">Precio: Mayor a menor</option>
+                <option value="newest">Más recientes</option>
+              </select>
+            </div>
+          </div>
+        </section>
 
-                <!-- Pedido Pendiente -->
-                <div class="order-item pending">
-                    <div class="order-status-icon pending">🕒</div>
-                    <div class="order-details">
-                        <div class="order-product">iPhone 14 Pro Max 256GB</div>
-                        <div class="order-date">Pedido: 16 Dic, 2024 • Estimado: 20 Dic, 2024</div>
-                        <span class="order-status pending">En camino</span>
-                    </div>
-                    <div class="order-actions">
-                        <button class="btn-action btn-secondary" onclick="trackOrder(2)">Seguir Pedido</button>
-                    </div>
-                </div>
+        <!-- Catálogo de Productos -->
+        <div class="catalog-header">
+          <h1>🛍️ Catálogo de Productos</h1>
+          <span class="products-count">Mostrando 8 productos</span>
+        </div>
 
-                <!-- Pedido Cancelado -->
-                <div class="order-item cancelled">
-                    <div class="order-status-icon cancelled">❌</div>
-                    <div class="order-details">
-                        <div class="order-product">Auriculares Sony WH-1000XM4</div>
-                        <div class="order-date">Pedido: 10 Dic, 2024 • Cancelado: 12 Dic, 2024</div>
-                        <span class="order-status cancelled">Cancelado</span>
-                    </div>
-                    <div class="order-actions">
-                        <button class="btn-action btn-primary" onclick="buyAgain(3)">Comprar Again</button>
-                    </div>
-                </div>
+        <div class="products-grid">
+          <!-- Producto 1 -->
+          <div class="product-card" onclick="openProductModal(1)">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
+                alt="Zapatos Deportivos"
+              />
+              <div class="product-badge">Nuevo</div>
             </div>
-        </main>
+            <div class="product-info">
+              <div class="product-category">👟 Calzado Deportivo</div>
+              <h3 class="product-title">Zapatos Running Nike Air Max</h3>
+              <p class="product-description">
+                Zapatos deportivos ideales para running con tecnología de
+                amortiguación Air Max.
+              </p>
+              <div class="product-footer">
+                <div class="product-price">$89.99</div>
+                <div class="product-rating">⭐ 4.8 (124)</div>
+              </div>
+            </div>
+          </div>
 
-        <!-- Main Content - Favoritos -->
-        <main class="main-content" id="favoritos-section" style="display: none;">
-            <div class="section-header">
-                <h1>❤️ Mis Favoritos</h1>
-                <span class="favorites-count">2 productos guardados</span>
+          <!-- Producto 2 -->
+          <div class="product-card" onclick="openProductModal(2)">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
+                alt="iPhone"
+              />
+              <div class="product-badge">Popular</div>
             </div>
-            <div class="empty-state">
-                <div class="empty-icon">❤️</div>
-                <h3>No tienes productos favoritos</h3>
-                <p>Agrega productos a tus favoritos para verlos aquí</p>
-                <button class="btn-primary" onclick="showSection('catalogo')">Explorar Catálogo</button>
+            <div class="product-info">
+              <div class="product-category">📱 Electrónica</div>
+              <h3 class="product-title">iPhone 14 Pro Max 256GB</h3>
+              <p class="product-description">
+                El último iPhone con cámara profesional, pantalla Always-On y
+                chip A16 Bionic.
+              </p>
+              <div class="product-footer">
+                <div class="product-price">$1,199.99</div>
+                <div class="product-rating">⭐ 4.9 (89)</div>
+              </div>
             </div>
-        </main>
+          </div>
 
-        <!-- Main Content - Configuración -->
-        <main class="main-content" id="configuracion-section" style="display: none;">
-            <div class="section-header">
-                <h1>⚙️ Configuración</h1>
+          <!-- Producto 3 -->
+          <div class="product-card" onclick="openProductModal(3)">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
+                alt="Auriculares"
+              />
             </div>
-            <div class="settings-grid">
-                <div class="setting-card">
-                    <h3>👤 Perfil Personal</h3>
-                    <p>Actualiza tu información personal y preferencias</p>
-                    <button class="btn-primary">Editar Perfil</button>
-                </div>
-                <div class="setting-card">
-                    <h3>🏠 Direcciones</h3>
-                    <p>Gestiona tus direcciones de envío</p>
-                    <button class="btn-primary">Gestionar Direcciones</button>
-                </div>
-                <div class="setting-card">
-                    <h3>💳 Métodos de Pago</h3>
-                    <p>Configura tus formas de pago</p>
-                    <button class="btn-primary">Gestionar Pagos</button>
-                </div>
-                <div class="setting-card">
-                    <h3>🔔 Notificaciones</h3>
-                    <p>Controla las notificaciones que recibes</p>
-                    <button class="btn-primary">Configurar</button>
-                </div>
+            <div class="product-info">
+              <div class="product-category">🎧 Audio</div>
+              <h3 class="product-title">Auriculares Sony WH-1000XM4</h3>
+              <p class="product-description">
+                Auriculares inalámbricos con cancelación de ruido líder en la
+                industria.
+              </p>
+              <div class="product-footer">
+                <div class="product-price">$349.99</div>
+                <div class="product-rating">⭐ 4.7 (203)</div>
+              </div>
             </div>
-        </main>
+          </div>
+
+          <!-- Producto 4 -->
+          <div class="product-card" onclick="openProductModal(4)">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
+                alt="Libro"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">📚 Libros</div>
+              <h3 class="product-title">Hábitos Atómicos - James Clear</h3>
+              <p class="product-description">
+                Un método fácil y probado para construir buenos hábitos y dejar
+                los malos.
+              </p>
+              <div class="product-footer">
+                <div class="product-price">$24.99</div>
+                <div class="product-rating">⭐ 4.8 (567)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Main Content - Pedidos -->
+      <main class="main-content" id="pedidos-section" style="display: none">
+        <div class="section-header">
+          <h1>📦 Mis Pedidos</h1>
+          <span class="orders-count">3 pedidos encontrados</span>
+        </div>
+
+        <div class="orders-list">
+          <!-- Pedido Entregado -->
+          <div class="order-item delivered">
+            <div class="order-status-icon delivered">✅</div>
+            <div class="order-details">
+              <div class="order-product">Zapatos Running Nike Air Max</div>
+              <div class="order-date">
+                Pedido: 15 Dic, 2024 • Entregado: 18 Dic, 2024
+              </div>
+              <span class="order-status delivered">Entregado</span>
+            </div>
+            <div class="order-actions">
+              <button
+                class="btn-action btn-secondary"
+                onclick="viewOrderDetails(1)"
+              >
+                Ver Detalles
+              </button>
+              <button class="btn-action btn-primary" onclick="buyAgain(1)">
+                Comprar Again
+              </button>
+            </div>
+          </div>
+
+          <!-- Pedido Pendiente -->
+          <div class="order-item pending">
+            <div class="order-status-icon pending">🕒</div>
+            <div class="order-details">
+              <div class="order-product">iPhone 14 Pro Max 256GB</div>
+              <div class="order-date">
+                Pedido: 16 Dic, 2024 • Estimado: 20 Dic, 2024
+              </div>
+              <span class="order-status pending">En camino</span>
+            </div>
+            <div class="order-actions">
+              <button class="btn-action btn-secondary" onclick="trackOrder(2)">
+                Seguir Pedido
+              </button>
+            </div>
+          </div>
+
+          <!-- Pedido Cancelado -->
+          <div class="order-item cancelled">
+            <div class="order-status-icon cancelled">❌</div>
+            <div class="order-details">
+              <div class="order-product">Auriculares Sony WH-1000XM4</div>
+              <div class="order-date">
+                Pedido: 10 Dic, 2024 • Cancelado: 12 Dic, 2024
+              </div>
+              <span class="order-status cancelled">Cancelado</span>
+            </div>
+            <div class="order-actions">
+              <button class="btn-action btn-primary" onclick="buyAgain(3)">
+                Comprar Again
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Main Content - Favoritos -->
+      <main class="main-content" id="favoritos-section" style="display: none">
+        <div class="section-header">
+          <h1>❤️ Mis Favoritos</h1>
+          <span class="favorites-count">2 productos guardados</span>
+        </div>
+        <div class="empty-state">
+          <div class="empty-icon">❤️</div>
+          <h3>No tienes productos favoritos</h3>
+          <p>Agrega productos a tus favoritos para verlos aquí</p>
+          <button class="btn-primary" onclick="showSection('catalogo')">
+            Explorar Catálogo
+          </button>
+        </div>
+      </main>
+
+      <!-- Main Content - Configuración -->
+      <main
+        class="main-content"
+        id="configuracion-section"
+        style="display: none"
+      >
+        <div class="section-header">
+          <h1>⚙️ Configuración</h1>
+        </div>
+        <div class="settings-grid">
+          <div class="setting-card">
+            <h3>👤 Perfil Personal</h3>
+            <p>Actualiza tu información personal y preferencias</p>
+            <button class="btn-primary">Editar Perfil</button>
+          </div>
+          <div class="setting-card">
+            <h3>🏠 Direcciones</h3>
+            <p>Gestiona tus direcciones de envío</p>
+            <button class="btn-primary">Gestionar Direcciones</button>
+          </div>
+          <div class="setting-card">
+            <h3>💳 Métodos de Pago</h3>
+            <p>Configura tus formas de pago</p>
+            <button class="btn-primary">Gestionar Pagos</button>
+          </div>
+          <div class="setting-card">
+            <h3>🔔 Notificaciones</h3>
+            <p>Controla las notificaciones que recibes</p>
+            <button class="btn-primary">Configurar</button>
+          </div>
+        </div>
+      </main>
     </div>
 
     <!-- Modal de Producto -->
     <div id="productModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Detalles del Producto</h2>
-                <button class="close-modal" onclick="closeProductModal()">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="product-modal-content">
-                    <div class="product-modal-image">
-                        <img id="modalProductImage" src="" alt="Producto">
-                    </div>
-                    <div class="product-modal-info">
-                        <div class="product-modal-category" id="modalProductCategory"></div>
-                        <h1 class="product-modal-title" id="modalProductTitle"></h1>
-                        <div class="product-modal-price" id="modalProductPrice"></div>
-                        <div class="product-modal-rating" id="modalProductRating"></div>
-                        <p class="product-modal-description" id="modalProductDescription"></p>
-                        <button class="btn-buy-large" onclick="openPurchaseModal()">🛒 Comprar Ahora</button>
-                    </div>
-                </div>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Detalles del Producto</h2>
+          <button class="close-modal" onclick="closeProductModal()">×</button>
         </div>
+        <div class="modal-body">
+          <div class="product-modal-content">
+            <div class="product-modal-image">
+              <img id="modalProductImage" src="" alt="Producto" />
+            </div>
+            <div class="product-modal-info">
+              <div
+                class="product-modal-category"
+                id="modalProductCategory"
+              ></div>
+              <h1 class="product-modal-title" id="modalProductTitle"></h1>
+              <div class="product-modal-price" id="modalProductPrice"></div>
+              <div class="product-modal-rating" id="modalProductRating"></div>
+              <p
+                class="product-modal-description"
+                id="modalProductDescription"
+              ></p>
+              <button class="btn-buy-large" onclick="openPurchaseModal()">
+                🛒 Comprar Ahora
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Modal de Compra -->
     <div id="purchaseModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Finalizar Compra</h2>
-                <button class="close-modal" onclick="closePurchaseModal()">×</button>
-            </div>
-            <div class="modal-body">
-                <form class="purchase-form" id="purchaseForm">
-                    <div class="form-group">
-                        <label for="customerName">Nombre completo *</label>
-                        <input type="text" id="customerName" placeholder="Tu nombre completo" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="customerEmail">Correo electrónico *</label>
-                        <input type="email" id="customerEmail" placeholder="tu@email.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="customerPhone">Teléfono *</label>
-                        <input type="tel" id="customerPhone" placeholder="+57 300 123 4567" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="shippingAddress">Dirección de envío *</label>
-                        <textarea id="shippingAddress" placeholder="Calle, número, ciudad, código postal" rows="3" required></textarea>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="shippingCity">Ciudad *</label>
-                            <input type="text" id="shippingCity" placeholder="Ciudad" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="shippingZip">Código postal *</label>
-                            <input type="text" id="shippingZip" placeholder="Código postal" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="paymentMethod">Método de pago *</label>
-                        <select id="paymentMethod" required>
-                            <option value="">Seleccionar método</option>
-                            <option value="credit">💳 Tarjeta de crédito</option>
-                            <option value="debit">💳 Tarjeta débito</option>
-                            <option value="paypal">📱 PayPal</option>
-                            <option value="cash">💵 Efectivo contra entrega</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="specialInstructions">Instrucciones especiales (opcional)</label>
-                        <textarea id="specialInstructions" placeholder="Alguna instrucción especial para la entrega..." rows="2"></textarea>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="button" class="btn-secondary" onclick="closePurchaseModal()">Cancelar</button>
-                        <button type="submit" class="btn-primary">Confirmar Compra</button>
-                    </div>
-                </form>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Finalizar Compra</h2>
+          <button class="close-modal" onclick="closePurchaseModal()">×</button>
         </div>
+        <div class="modal-body">
+          <form class="purchase-form" id="purchaseForm">
+            <div class="form-group">
+              <label for="customerName">Nombre completo *</label>
+              <input
+                type="text"
+                id="customerName"
+                placeholder="Tu nombre completo"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="customerEmail">Correo electrónico *</label>
+              <input
+                type="email"
+                id="customerEmail"
+                placeholder="tu@email.com"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="customerPhone">Teléfono *</label>
+              <input
+                type="tel"
+                id="customerPhone"
+                placeholder="+57 300 123 4567"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="shippingAddress">Dirección de envío *</label>
+              <textarea
+                id="shippingAddress"
+                placeholder="Calle, número, ciudad, código postal"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="shippingCity">Ciudad *</label>
+                <input
+                  type="text"
+                  id="shippingCity"
+                  placeholder="Ciudad"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="shippingZip">Código postal *</label>
+                <input
+                  type="text"
+                  id="shippingZip"
+                  placeholder="Código postal"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="paymentMethod">Método de pago *</label>
+              <select id="paymentMethod" required>
+                <option value="">Seleccionar método</option>
+                <option value="credit">💳 Tarjeta de crédito</option>
+                <option value="debit">💳 Tarjeta débito</option>
+                <option value="paypal">📱 PayPal</option>
+                <option value="cash">💵 Efectivo contra entrega</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="specialInstructions"
+                >Instrucciones especiales (opcional)</label
+              >
+              <textarea
+                id="specialInstructions"
+                placeholder="Alguna instrucción especial para la entrega..."
+                rows="2"
+              ></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button
+                type="button"
+                class="btn-secondary"
+                onclick="closePurchaseModal()"
+              >
+                Cancelar
+              </button>
+              <button type="submit" class="btn-primary">
+                Confirmar Compra
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 
     <script src="dashboard_comprador.js"></script>
-</body>
+  </body>
 </html>

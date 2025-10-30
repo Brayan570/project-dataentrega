@@ -1142,3 +1142,22 @@ document.head.appendChild(style);
 
 // Inicializar
 updatePedidosBadge();
+
+// Menú móvil
+function toggleMobileMenu() {
+  const sidebar = document.querySelector(".sidebar");
+  sidebar.classList.toggle("active");
+}
+
+// Cerrar menú al hacer clic en un enlace
+document.addEventListener("DOMContentLoaded", function () {
+  const navLinks = document.querySelectorAll(".nav-item a");
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (window.innerWidth <= 768) {
+        const sidebar = document.querySelector(".sidebar");
+        sidebar.classList.remove("active");
+      }
+    });
+  });
+});

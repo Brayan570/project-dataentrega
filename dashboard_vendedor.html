@@ -1,879 +1,1006 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel del Vendedor - Confio</title>
-    <link rel="stylesheet" href="dashboard_vendedor.css">
-</head>
-<body>
+    <link rel="stylesheet" href="dashboard_vendedor.css" />
+  </head>
+  <body>
     <div class="dashboard-container">
-        <!-- Header -->
-        <header class="dashboard-header">
-            <div class="header-left">
-                <div class="logo">
-                    <div class="shield-icon">🤝</div>
-                    Confio - Panel Vendedor
-                </div>
+      <!-- Header -->
+      <header class="dashboard-header">
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <div class="header-left">
+          <div class="logo">
+            <div class="shield-icon">🤝</div>
+            Confio - Panel Vendedor
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="notifications">
+            <button class="notification-btn">
+              🔔
+              <span class="notification-badge">3</span>
+            </button>
+          </div>
+          <div class="user-menu">
+            <span class="user-name">Nombre Usuario</span>
+            <div class="user-avatar">NU</div>
+            <div class="dropdown-menu">
+              <a href="#perfil">👤 Mi Perfil</a>
+              <a href="#configuracion">⚙️ Configuración</a>
+              <!-- AQUÍ CAMBIAR: -->
+              <a href="#logout" class="logout" onclick="logout()"
+                >🚪 Cerrar Sesión</a
+              >
             </div>
-            <div class="header-right">
-                <div class="notifications">
-                    <button class="notification-btn">
-                        🔔
-                        <span class="notification-badge">3</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Navigation Sidebar -->
+      <nav class="sidebar">
+        <ul class="nav-links">
+          <li class="nav-item active">
+            <a href="#dashboard"> 📊 Dashboard </a>
+          </li>
+          <li class="nav-item">
+            <a href="#productos"> 📦 Productos </a>
+          </li>
+          <li class="nav-item">
+            <a href="#pedidos">
+              🛒 Pedidos
+              <span class="nav-badge">12</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#reputacion"> ⭐ Reputación Clientes </a>
+          </li>
+          <li class="nav-item">
+            <a href="#configuracion"> ⚙️ Configuración </a>
+          </li>
+        </ul>
+
+        <div class="sidebar-footer">
+          <div class="seller-stats">
+            <div class="seller-stat">
+              <span class="stat-label">Vendedor Nivel</span>
+              <span class="stat-value gold">⭐ Oro</span>
+            </div>
+            <div class="seller-stat">
+              <span class="stat-label">Confianza</span>
+              <span class="stat-value">95%</span>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content - Dashboard -->
+      <main class="main-content" id="dashboard-section">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+          <h1>¡Bienvenida, Ana! 👋</h1>
+          <p>Aquí tienes el resumen de tu tienda hoy</p>
+          <div class="quick-stats">
+            <div class="quick-stat">
+              <span class="stat-icon">💰</span>
+              <span class="stat-text">Ventas hoy: $1,240</span>
+            </div>
+            <div class="quick-stat">
+              <span class="stat-icon">📦</span>
+              <span class="stat-text">Pedidos activos: 8</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon total-sales">💰</div>
+            <div class="stat-info">
+              <h3>Total de Ventas</h3>
+              <span class="stat-number">$12,458</span>
+              <span class="stat-change positive">+12% vs mes anterior</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon positive-ratings">⭐</div>
+            <div class="stat-info">
+              <h3>Calificaciones Positivas</h3>
+              <span class="stat-number">142</span>
+              <span class="stat-change positive">+8 esta semana</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon negative-ratings">⚠️</div>
+            <div class="stat-info">
+              <h3>Calificaciones Negativas</h3>
+              <span class="stat-number">6</span>
+              <span class="stat-change negative">+1 esta semana</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon rating-avg">📈</div>
+            <div class="stat-info">
+              <h3>Rating Promedio</h3>
+              <span class="stat-number">4.7/5</span>
+              <span class="stat-change positive">+0.2 este mes</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="content-columns">
+          <!-- Left Column - Últimos Pedidos -->
+          <div class="column">
+            <section class="orders-section">
+              <div class="section-header">
+                <h2>🛒 Últimos Pedidos Recibidos</h2>
+                <a href="#ver-todos" class="view-all">Ver todos →</a>
+              </div>
+
+              <div class="orders-list">
+                <div class="order-card new">
+                  <div class="order-header">
+                    <span class="order-id">#ORD-7842</span>
+                    <span class="order-date">Hoy, 14:30</span>
+                  </div>
+                  <div class="order-client">
+                    <span class="client-name">Carlos Rodríguez</span>
+                    <span class="order-amount">$245</span>
+                  </div>
+                  <div class="order-status pending">⏳ Pendiente de envío</div>
+                  <div class="order-actions">
+                    <button
+                      class="btn-action accept"
+                      onclick="markAsProcessing(7842)"
+                    >
+                      ✅ Aceptar
                     </button>
-                </div>
-                <div class="user-menu">
-                    <span class="user-name">Nombre Usuario</span>
-                    <div class="user-avatar">NU</div>
-                    <div class="dropdown-menu">
-                        <a href="#perfil">👤 Mi Perfil</a>
-                        <a href="#configuracion">⚙️ Configuración</a>
-                        <!-- AQUÍ CAMBIAR: -->
-                        <a href="#logout" class="logout" onclick="logout()">🚪 Cerrar Sesión</a>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Navigation Sidebar -->
-        <nav class="sidebar">
-            <ul class="nav-links">
-                <li class="nav-item active">
-                    <a href="#dashboard">
-                        📊 Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#productos">
-                        📦 Productos
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#pedidos">
-                        🛒 Pedidos
-                        <span class="nav-badge">12</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#reputacion">
-                        ⭐ Reputación Clientes
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#configuracion">
-                        ⚙️ Configuración
-                    </a>
-                </li>
-            </ul>
-            
-            <div class="sidebar-footer">
-                <div class="seller-stats">
-                    <div class="seller-stat">
-                        <span class="stat-label">Vendedor Nivel</span>
-                        <span class="stat-value gold">⭐ Oro</span>
-                    </div>
-                    <div class="seller-stat">
-                        <span class="stat-label">Confianza</span>
-                        <span class="stat-value">95%</span>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Main Content - Dashboard -->
-        <main class="main-content" id="dashboard-section">
-            <!-- Welcome Section -->
-            <div class="welcome-section">
-                <h1>¡Bienvenida, Ana! 👋</h1>
-                <p>Aquí tienes el resumen de tu tienda hoy</p>
-                <div class="quick-stats">
-                    <div class="quick-stat">
-                        <span class="stat-icon">💰</span>
-                        <span class="stat-text">Ventas hoy: $1,240</span>
-                    </div>
-                    <div class="quick-stat">
-                        <span class="stat-icon">📦</span>
-                        <span class="stat-text">Pedidos activos: 8</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main Stats Grid -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon total-sales">💰</div>
-                    <div class="stat-info">
-                        <h3>Total de Ventas</h3>
-                        <span class="stat-number">$12,458</span>
-                        <span class="stat-change positive">+12% vs mes anterior</span>
-                    </div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon positive-ratings">⭐</div>
-                    <div class="stat-info">
-                        <h3>Calificaciones Positivas</h3>
-                        <span class="stat-number">142</span>
-                        <span class="stat-change positive">+8 esta semana</span>
-                    </div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon negative-ratings">⚠️</div>
-                    <div class="stat-info">
-                        <h3>Calificaciones Negativas</h3>
-                        <span class="stat-number">6</span>
-                        <span class="stat-change negative">+1 esta semana</span>
-                    </div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon rating-avg">📈</div>
-                    <div class="stat-info">
-                        <h3>Rating Promedio</h3>
-                        <span class="stat-number">4.7/5</span>
-                        <span class="stat-change positive">+0.2 este mes</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Two Column Layout -->
-            <div class="content-columns">
-                <!-- Left Column - Últimos Pedidos -->
-                <div class="column">
-                    <section class="orders-section">
-                        <div class="section-header">
-                            <h2>🛒 Últimos Pedidos Recibidos</h2>
-                            <a href="#ver-todos" class="view-all">Ver todos →</a>
-                        </div>
-                        
-                        <div class="orders-list">
-                            <div class="order-card new">
-                                <div class="order-header">
-                                    <span class="order-id">#ORD-7842</span>
-                                    <span class="order-date">Hoy, 14:30</span>
-                                </div>
-                                <div class="order-client">
-                                    <span class="client-name">Carlos Rodríguez</span>
-                                    <span class="order-amount">$245</span>
-                                </div>
-                                <div class="order-status pending">⏳ Pendiente de envío</div>
-                                <div class="order-actions">
-                                    <button class="btn-action accept" onclick="markAsProcessing(7842)">✅ Aceptar</button>
-                                    <button class="btn-action reject" onclick="cancelOrder(7842)">❌ Rechazar</button>
-                                </div>
-                            </div>
-                            
-                            <div class="order-card processing">
-                                <div class="order-header">
-                                    <span class="order-id">#ORD-7841</span>
-                                    <span class="order-date">Hoy, 11:15</span>
-                                </div>
-                                <div class="order-client">
-                                    <span class="client-name">María López</span>
-                                    <span class="order-amount">$189</span>
-                                </div>
-                                <div class="order-status processing">🚚 En preparación</div>
-                                <div class="order-actions">
-                                    <button class="btn-action ship" onclick="markAsDelivered(7841)">📦 Marcar como enviado</button>
-                                </div>
-                            </div>
-                            
-                            <div class="order-card completed">
-                                <div class="order-header">
-                                    <span class="order-id">#ORD-7840</span>
-                                    <span class="order-date">Ayer, 16:45</span>
-                                </div>
-                                <div class="order-client">
-                                    <span class="client-name">Roberto Sánchez</span>
-                                    <span class="order-amount">$320</span>
-                                </div>
-                                <div class="order-status completed">✅ Completado</div>
-                                <div class="client-rating">
-                                    <span class="rating-stars">⭐⭐⭐⭐⭐</span>
-                                    <span class="rating-text">"Excelente servicio"</span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                    <button
+                      class="btn-action reject"
+                      onclick="cancelOrder(7842)"
+                    >
+                      ❌ Rechazar
+                    </button>
+                  </div>
                 </div>
 
-                <!-- Right Column - Métricas y Reputación -->
-                <div class="column">
-                    <!-- Rating Distribution -->
-                    <section class="ratings-section">
-                        <div class="section-header">
-                            <h2>⭐ Distribución de Calificaciones</h2>
-                        </div>
-                        <div class="ratings-distribution">
-                            <div class="rating-bar">
-                                <span class="rating-stars">⭐⭐⭐⭐⭐</span>
-                                <div class="bar-container">
-                                    <div class="bar-fill" style="width: 75%"></div>
-                                </div>
-                                <span class="rating-count">142</span>
-                            </div>
-                            <div class="rating-bar">
-                                <span class="rating-stars">⭐⭐⭐⭐</span>
-                                <div class="bar-container">
-                                    <div class="bar-fill" style="width: 18%"></div>
-                                </div>
-                                <span class="rating-count">34</span>
-                            </div>
-                            <div class="rating-bar">
-                                <span class="rating-stars">⭐⭐⭐</span>
-                                <div class="bar-container">
-                                    <div class="bar-fill" style="width: 5%"></div>
-                                </div>
-                                <span class="rating-count">8</span>
-                            </div>
-                            <div class="rating-bar">
-                                <span class="rating-stars">⭐⭐</span>
-                                <div class="bar-container">
-                                    <div class="bar-fill" style="width: 1.5%"></div>
-                                </div>
-                                <span class="rating-count">3</span>
-                            </div>
-                            <div class="rating-bar">
-                                <span class="rating-stars">⭐</span>
-                                <div class="bar-container">
-                                    <div class="bar-fill" style="width: 0.5%"></div>
-                                </div>
-                                <span class="rating-count">1</span>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Top Clients -->
-                    <section class="clients-section">
-                        <div class="section-header">
-                            <h2>👥 Clientes Más Confiables</h2>
-                        </div>
-                        <div class="clients-list">
-                            <div class="client-card">
-                                <div class="client-avatar">ML</div>
-                                <div class="client-info">
-                                    <span class="client-name">María López</span>
-                                    <span class="client-stats">12 compras • ⭐ 4.9/5</span>
-                                </div>
-                                <div class="client-trust high">95%</div>
-                            </div>
-                            <div class="client-card">
-                                <div class="client-avatar">CR</div>
-                                <div class="client-info">
-                                    <span class="client-name">Carlos Rodríguez</span>
-                                    <span class="client-stats">8 compras • ⭐ 4.8/5</span>
-                                </div>
-                                <div class="client-trust high">92%</div>
-                            </div>
-                            <div class="client-card">
-                                <div class="client-avatar">AS</div>
-                                <div class="client-info">
-                                    <span class="client-name">Ana Sánchez</span>
-                                    <span class="client-stats">15 compras • ⭐ 4.7/5</span>
-                                </div>
-                                <div class="client-trust medium">85%</div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Quick Actions -->
-                    <section class="quick-actions">
-                        <div class="section-header">
-                            <h2>🚀 Acciones Rápidas</h2>
-                        </div>
-                        <div class="actions-grid">
-                            <button class="action-btn" onclick="openProductModal()">
-                                <span class="action-icon">➕</span>
-                                <span class="action-text">Agregar Producto</span>
-                            </button>
-                            <button class="action-btn" onclick="showSection('pedidos')">
-                                <span class="action-icon">📋</span>
-                                <span class="action-text">Gestionar Pedidos</span>
-                            </button>
-                            <button class="action-btn" onclick="showSection('reputacion')">
-                                <span class="action-icon">📊</span>
-                                <span class="action-text">Ver Reportes</span>
-                            </button>
-                            <button class="action-btn" onclick="showSection('configuracion')">
-                                <span class="action-icon">⚙️</span>
-                                <span class="action-text">Configuración</span>
-                            </button>
-                        </div>
-                    </section>
+                <div class="order-card processing">
+                  <div class="order-header">
+                    <span class="order-id">#ORD-7841</span>
+                    <span class="order-date">Hoy, 11:15</span>
+                  </div>
+                  <div class="order-client">
+                    <span class="client-name">María López</span>
+                    <span class="order-amount">$189</span>
+                  </div>
+                  <div class="order-status processing">🚚 En preparación</div>
+                  <div class="order-actions">
+                    <button
+                      class="btn-action ship"
+                      onclick="markAsDelivered(7841)"
+                    >
+                      📦 Marcar como enviado
+                    </button>
+                  </div>
                 </div>
-            </div>
-        </main>
 
-        <!-- Sección de Productos -->
-        <main class="main-content" id="productos-section" style="display: none;">
-            <div class="section-header">
-                <h1>🛍️ Mis Productos</h1>
-                <button class="btn-primary" onclick="openProductModal()">
-                    ➕ Agregar Producto
+                <div class="order-card completed">
+                  <div class="order-header">
+                    <span class="order-id">#ORD-7840</span>
+                    <span class="order-date">Ayer, 16:45</span>
+                  </div>
+                  <div class="order-client">
+                    <span class="client-name">Roberto Sánchez</span>
+                    <span class="order-amount">$320</span>
+                  </div>
+                  <div class="order-status completed">✅ Completado</div>
+                  <div class="client-rating">
+                    <span class="rating-stars">⭐⭐⭐⭐⭐</span>
+                    <span class="rating-text">"Excelente servicio"</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Right Column - Métricas y Reputación -->
+          <div class="column">
+            <!-- Rating Distribution -->
+            <section class="ratings-section">
+              <div class="section-header">
+                <h2>⭐ Distribución de Calificaciones</h2>
+              </div>
+              <div class="ratings-distribution">
+                <div class="rating-bar">
+                  <span class="rating-stars">⭐⭐⭐⭐⭐</span>
+                  <div class="bar-container">
+                    <div class="bar-fill" style="width: 75%"></div>
+                  </div>
+                  <span class="rating-count">142</span>
+                </div>
+                <div class="rating-bar">
+                  <span class="rating-stars">⭐⭐⭐⭐</span>
+                  <div class="bar-container">
+                    <div class="bar-fill" style="width: 18%"></div>
+                  </div>
+                  <span class="rating-count">34</span>
+                </div>
+                <div class="rating-bar">
+                  <span class="rating-stars">⭐⭐⭐</span>
+                  <div class="bar-container">
+                    <div class="bar-fill" style="width: 5%"></div>
+                  </div>
+                  <span class="rating-count">8</span>
+                </div>
+                <div class="rating-bar">
+                  <span class="rating-stars">⭐⭐</span>
+                  <div class="bar-container">
+                    <div class="bar-fill" style="width: 1.5%"></div>
+                  </div>
+                  <span class="rating-count">3</span>
+                </div>
+                <div class="rating-bar">
+                  <span class="rating-stars">⭐</span>
+                  <div class="bar-container">
+                    <div class="bar-fill" style="width: 0.5%"></div>
+                  </div>
+                  <span class="rating-count">1</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- Top Clients -->
+            <section class="clients-section">
+              <div class="section-header">
+                <h2>👥 Clientes Más Confiables</h2>
+              </div>
+              <div class="clients-list">
+                <div class="client-card">
+                  <div class="client-avatar">ML</div>
+                  <div class="client-info">
+                    <span class="client-name">María López</span>
+                    <span class="client-stats">12 compras • ⭐ 4.9/5</span>
+                  </div>
+                  <div class="client-trust high">95%</div>
+                </div>
+                <div class="client-card">
+                  <div class="client-avatar">CR</div>
+                  <div class="client-info">
+                    <span class="client-name">Carlos Rodríguez</span>
+                    <span class="client-stats">8 compras • ⭐ 4.8/5</span>
+                  </div>
+                  <div class="client-trust high">92%</div>
+                </div>
+                <div class="client-card">
+                  <div class="client-avatar">AS</div>
+                  <div class="client-info">
+                    <span class="client-name">Ana Sánchez</span>
+                    <span class="client-stats">15 compras • ⭐ 4.7/5</span>
+                  </div>
+                  <div class="client-trust medium">85%</div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="quick-actions">
+              <div class="section-header">
+                <h2>🚀 Acciones Rápidas</h2>
+              </div>
+              <div class="actions-grid">
+                <button class="action-btn" onclick="openProductModal()">
+                  <span class="action-icon">➕</span>
+                  <span class="action-text">Agregar Producto</span>
                 </button>
+                <button class="action-btn" onclick="showSection('pedidos')">
+                  <span class="action-icon">📋</span>
+                  <span class="action-text">Gestionar Pedidos</span>
+                </button>
+                <button class="action-btn" onclick="showSection('reputacion')">
+                  <span class="action-icon">📊</span>
+                  <span class="action-text">Ver Reportes</span>
+                </button>
+                <button
+                  class="action-btn"
+                  onclick="showSection('configuracion')"
+                >
+                  <span class="action-icon">⚙️</span>
+                  <span class="action-text">Configuración</span>
+                </button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+
+      <!-- Sección de Productos -->
+      <main class="main-content" id="productos-section" style="display: none">
+        <div class="section-header">
+          <h1>🛍️ Mis Productos</h1>
+          <button class="btn-primary" onclick="openProductModal()">
+            ➕ Agregar Producto
+          </button>
+        </div>
+
+        <div class="products-grid">
+          <!-- Producto 1 -->
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://via.placeholder.com/200x150/3B82F6/FFFFFF?text=Zapatos+Nike"
+                alt="Zapatos Deportivos"
+              />
+              <div class="product-overlay">
+                <button class="btn-icon" onclick="editProduct(1)">✏️</button>
+                <button class="btn-icon delete" onclick="deleteProduct(1)">
+                  🗑️
+                </button>
+              </div>
             </div>
-
-            <div class="products-grid">
-                <!-- Producto 1 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/200x150/3B82F6/FFFFFF?text=Zapatos+Nike" alt="Zapatos Deportivos">
-                        <div class="product-overlay">
-                            <button class="btn-icon" onclick="editProduct(1)">✏️</button>
-                            <button class="btn-icon delete" onclick="deleteProduct(1)">🗑️</button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Zapatos Deportivos Nike</h3>
-                        <p class="product-description">Zapatos deportivos para running, talla 42</p>
-                        <div class="product-details">
-                            <span class="product-price">$89.99</span>
-                            <span class="product-stock">Stock: 15</span>
-                        </div>
-                        <div class="product-category">
-                            <span class="category-badge">👟 Calzado</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Producto 2 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/200x150/EF4444/FFFFFF?text=Camiseta+Negra" alt="Camiseta Básica">
-                        <div class="product-overlay">
-                            <button class="btn-icon" onclick="editProduct(2)">✏️</button>
-                            <button class="btn-icon delete" onclick="deleteProduct(2)">🗑️</button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Camiseta Básica Negra</h3>
-                        <p class="product-description">Camiseta 100% algodón, talla M</p>
-                        <div class="product-details">
-                            <span class="product-price">$24.99</span>
-                            <span class="product-stock low-stock">Stock: 2</span>
-                        </div>
-                        <div class="product-category">
-                            <span class="category-badge">👕 Ropa</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Producto 3 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <div class="no-image">📷</div>
-                        <div class="product-overlay">
-                            <button class="btn-icon" onclick="editProduct(3)">✏️</button>
-                            <button class="btn-icon delete" onclick="deleteProduct(3)">🗑️</button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Auriculares Bluetooth</h3>
-                        <p class="product-description">Auriculares inalámbricos con cancelación de ruido</p>
-                        <div class="product-details">
-                            <span class="product-price">$129.99</span>
-                            <span class="product-stock">Stock: 8</span>
-                        </div>
-                        <div class="product-category">
-                            <span class="category-badge">📱 Electrónica</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Producto 4 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://via.placeholder.com/200x150/10B981/FFFFFF?text=Libro+Cocina" alt="Libro de Cocina">
-                        <div class="product-overlay">
-                            <button class="btn-icon" onclick="editProduct(4)">✏️</button>
-                            <button class="btn-icon delete" onclick="deleteProduct(4)">🗑️</button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Libro de Cocina Italiana</h3>
-                        <p class="product-description">Recetas tradicionales italianas, 200 páginas</p>
-                        <div class="product-details">
-                            <span class="product-price">$29.99</span>
-                            <span class="product-stock">Stock: 25</span>
-                        </div>
-                        <div class="product-category">
-                            <span class="category-badge">📚 Libros</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="product-info">
+              <h3 class="product-name">Zapatos Deportivos Nike</h3>
+              <p class="product-description">
+                Zapatos deportivos para running, talla 42
+              </p>
+              <div class="product-details">
+                <span class="product-price">$89.99</span>
+                <span class="product-stock">Stock: 15</span>
+              </div>
+              <div class="product-category">
+                <span class="category-badge">👟 Calzado</span>
+              </div>
             </div>
-        </main>
+          </div>
 
-        <!-- Sección de Pedidos -->
-        <main class="main-content" id="pedidos-section" style="display: none;">
-            <div class="section-header">
-                <h1>📦 Pedidos</h1>
-                <div class="order-filters">
-                    <select id="statusFilter" onchange="filterOrders()">
-                        <option value="all">Todos los estados</option>
-                        <option value="pending">⏳ Pendientes</option>
-                        <option value="processing">🚚 En proceso</option>
-                        <option value="completed">✅ Completados</option>
-                        <option value="cancelled">❌ Cancelados</option>
-                    </select>
-                </div>
+          <!-- Producto 2 -->
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://via.placeholder.com/200x150/EF4444/FFFFFF?text=Camiseta+Negra"
+                alt="Camiseta Básica"
+              />
+              <div class="product-overlay">
+                <button class="btn-icon" onclick="editProduct(2)">✏️</button>
+                <button class="btn-icon delete" onclick="deleteProduct(2)">
+                  🗑️
+                </button>
+              </div>
             </div>
-
-            <div class="orders-table-container">
-                <table class="orders-table">
-                    <thead>
-                        <tr>
-                            <th>Cliente</th>
-                            <th>Producto</th>
-                            <th>Fecha</th>
-                            <th>Estado</th>
-                            <th>Total</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Pedido 1 - Pendiente -->
-                        <tr class="order-row pending">
-                            <td>
-                                <div class="client-cell">
-                                    <div class="client-avatar-small">ML</div>
-                                    <div class="client-info">
-                                        <span class="client-name">María López</span>
-                                        <span class="client-contact">maria@email.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-cell">
-                                    <span class="product-name">Zapatos Deportivos Nike</span>
-                                    <span class="product-quantity">Cantidad: 1</span>
-                                </div>
-                            </td>
-                            <td>15 Dic, 10:30</td>
-                            <td>
-                                <span class="status-badge pending">⏳ Pendiente</span>
-                            </td>
-                            <td>$89.99</td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn-success btn-sm" onclick="markAsProcessing(7842)">
-                                        ✅ Aceptar
-                                    </button>
-                                    <button class="btn-danger btn-sm" onclick="cancelOrder(7842)">
-                                        ❌ Rechazar
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <!-- Pedido 2 - En proceso -->
-                        <tr class="order-row processing">
-                            <td>
-                                <div class="client-cell">
-                                    <div class="client-avatar-small">CR</div>
-                                    <div class="client-info">
-                                        <span class="client-name">Carlos Rodríguez</span>
-                                        <span class="client-contact">carlos@email.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-cell">
-                                    <span class="product-name">Camiseta Básica Negra ×2</span>
-                                    <span class="product-quantity">Cantidad: 2</span>
-                                </div>
-                            </td>
-                            <td>14 Dic, 16:45</td>
-                            <td>
-                                <span class="status-badge processing">🚚 En proceso</span>
-                            </td>
-                            <td>$49.98</td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn-primary btn-sm" onclick="markAsDelivered(7841)">
-                                        📦 Marcar entregado
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <!-- Pedido 3 - Completado -->
-                        <tr class="order-row completed">
-                            <td>
-                                <div class="client-cell">
-                                    <div class="client-avatar-small">AS</div>
-                                    <div class="client-info">
-                                        <span class="client-name">Ana Sánchez</span>
-                                        <span class="client-contact">ana@email.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-cell">
-                                    <span class="product-name">Auriculares Bluetooth</span>
-                                    <span class="product-quantity">Cantidad: 1</span>
-                                </div>
-                            </td>
-                            <td>13 Dic, 11:20</td>
-                            <td>
-                                <span class="status-badge completed">✅ Completado</span>
-                            </td>
-                            <td>$129.99</td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn-secondary btn-sm" onclick="viewOrderDetails(7840)">
-                                        👁️ Ver
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <!-- Pedido 4 - Pendiente -->
-                        <tr class="order-row pending">
-                            <td>
-                                <div class="client-cell">
-                                    <div class="client-avatar-small">JR</div>
-                                    <div class="client-info">
-                                        <span class="client-name">Juan Ramírez</span>
-                                        <span class="client-contact">juan@email.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="product-cell">
-                                    <span class="product-name">Libro de Cocina Italiana</span>
-                                    <span class="product-quantity">Cantidad: 1</span>
-                                </div>
-                            </td>
-                            <td>15 Dic, 09:15</td>
-                            <td>
-                                <span class="status-badge pending">⏳ Pendiente</span>
-                            </td>
-                            <td>$29.99</td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn-success btn-sm" onclick="markAsProcessing(7839)">
-                                        ✅ Aceptar
-                                    </button>
-                                    <button class="btn-danger btn-sm" onclick="cancelOrder(7839)">
-                                        ❌ Rechazar
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="product-info">
+              <h3 class="product-name">Camiseta Básica Negra</h3>
+              <p class="product-description">Camiseta 100% algodón, talla M</p>
+              <div class="product-details">
+                <span class="product-price">$24.99</span>
+                <span class="product-stock low-stock">Stock: 2</span>
+              </div>
+              <div class="product-category">
+                <span class="category-badge">👕 Ropa</span>
+              </div>
             </div>
-        </main>
+          </div>
 
-        <!-- Sección de Reputación de Clientes -->
-        <main class="main-content" id="reputacion-section" style="display: none;">
-            <div class="section-header">
-                <h1>⭐ Reputación de Clientes</h1>
-                <div class="reputation-filters">
-                    <select id="trustFilter" onchange="filterClients()">
-                        <option value="all">Todos los clientes</option>
-                        <option value="high">🟢 Confiables</option>
-                        <option value="medium">🟡 Regulares</option>
-                        <option value="low">🔴 Riesgo</option>
-                    </select>
-                </div>
+          <!-- Producto 3 -->
+          <div class="product-card">
+            <div class="product-image">
+              <div class="no-image">📷</div>
+              <div class="product-overlay">
+                <button class="btn-icon" onclick="editProduct(3)">✏️</button>
+                <button class="btn-icon delete" onclick="deleteProduct(3)">
+                  🗑️
+                </button>
+              </div>
             </div>
-
-            <div class="reputation-stats">
-                <div class="stat-card">
-                    <div class="stat-icon">👥</div>
-                    <div class="stat-info">
-                        <h3>Total Clientes</h3>
-                        <span class="stat-number">47</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🟢</div>
-                    <div class="stat-info">
-                        <h3>Clientes Confiables</h3>
-                        <span class="stat-number">32</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">⭐</div>
-                    <div class="stat-info">
-                        <h3>Rating Promedio</h3>
-                        <span class="stat-number">4.6</span>
-                    </div>
-                </div>
+            <div class="product-info">
+              <h3 class="product-name">Auriculares Bluetooth</h3>
+              <p class="product-description">
+                Auriculares inalámbricos con cancelación de ruido
+              </p>
+              <div class="product-details">
+                <span class="product-price">$129.99</span>
+                <span class="product-stock">Stock: 8</span>
+              </div>
+              <div class="product-category">
+                <span class="category-badge">📱 Electrónica</span>
+              </div>
             </div>
+          </div>
 
-            <div class="clients-reputation-list">
-                <!-- Cliente Confiable -->
-                <div class="client-reputation-card high-trust">
-                    <div class="client-main-info">
-                        <div class="client-avatar">ML</div>
-                        <div class="client-details">
-                            <h3 class="client-name">María López</h3>
-                            <div class="client-stats">
-                                <span class="purchases">12 compras</span>
-                                <span class="positive-rate">92% positivas</span>
-                            </div>
-                        </div>
-                        <div class="trust-indicator">
-                            <span class="trust-level high">🟢 Confiable</span>
-                            <span class="trust-percentage">95%</span>
-                        </div>
-                    </div>
-                    <div class="client-additional-info">
-                        <div class="info-item">
-                            <span class="info-label">Última compra:</span>
-                            <span class="info-value">15 Dic, 2024</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Total gastado:</span>
-                            <span class="info-value">$1,245.50</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Comportamiento:</span>
-                            <span class="info-value positive">✅ Siempre recibe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cliente Regular -->
-                <div class="client-reputation-card medium-trust">
-                    <div class="client-main-info">
-                        <div class="client-avatar">JR</div>
-                        <div class="client-details">
-                            <h3 class="client-name">José Ramírez</h3>
-                            <div class="client-stats">
-                                <span class="purchases">5 compras</span>
-                                <span class="positive-rate">65% positivas</span>
-                            </div>
-                        </div>
-                        <div class="trust-indicator">
-                            <span class="trust-level medium">🟡 Regular</span>
-                            <span class="trust-percentage">68%</span>
-                        </div>
-                    </div>
-                    <div class="client-additional-info">
-                        <div class="info-item">
-                            <span class="info-label">Última compra:</span>
-                            <span class="info-value">10 Dic, 2024</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Total gastado:</span>
-                            <span class="info-value">$320.75</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Comportamiento:</span>
-                            <span class="info-value warning">⚠️ 1 entrega fallida</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cliente Riesgo -->
-                <div class="client-reputation-card low-trust">
-                    <div class="client-main-info">
-                        <div class="client-avatar">PG</div>
-                        <div class="client-details">
-                            <h3 class="client-name">Pedro Gómez</h3>
-                            <div class="client-stats">
-                                <span class="purchases">3 compras</span>
-                                <span class="positive-rate">33% positivas</span>
-                            </div>
-                        </div>
-                        <div class="trust-indicator">
-                            <span class="trust-level low">🔴 Riesgo</span>
-                            <span class="trust-percentage">45%</span>
-                        </div>
-                    </div>
-                    <div class="client-additional-info">
-                        <div class="info-item">
-                            <span class="info-label">Última compra:</span>
-                            <span class="info-value">5 Dic, 2024</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Total gastado:</span>
-                            <span class="info-value">$156.30</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Comportamiento:</span>
-                            <span class="info-value negative">❌ 2 entregas fallidas</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cliente Confiable 2 -->
-                <div class="client-reputation-card high-trust">
-                    <div class="client-main-info">
-                        <div class="client-avatar">CR</div>
-                        <div class="client-details">
-                            <h3 class="client-name">Carlos Rodríguez</h3>
-                            <div class="client-stats">
-                                <span class="purchases">8 compras</span>
-                                <span class="positive-rate">88% positivas</span>
-                            </div>
-                        </div>
-                        <div class="trust-indicator">
-                            <span class="trust-level high">🟢 Confiable</span>
-                            <span class="trust-percentage">92%</span>
-                        </div>
-                    </div>
-                    <div class="client-additional-info">
-                        <div class="info-item">
-                            <span class="info-label">Última compra:</span>
-                            <span class="info-value">14 Dic, 2024</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Total gastado:</span>
-                            <span class="info-value">$890.25</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Comportamiento:</span>
-                            <span class="info-value positive">✅ Puntual en pagos</span>
-                        </div>
-                    </div>
-                </div>
+          <!-- Producto 4 -->
+          <div class="product-card">
+            <div class="product-image">
+              <img
+                src="https://via.placeholder.com/200x150/10B981/FFFFFF?text=Libro+Cocina"
+                alt="Libro de Cocina"
+              />
+              <div class="product-overlay">
+                <button class="btn-icon" onclick="editProduct(4)">✏️</button>
+                <button class="btn-icon delete" onclick="deleteProduct(4)">
+                  🗑️
+                </button>
+              </div>
             </div>
-        </main>
+            <div class="product-info">
+              <h3 class="product-name">Libro de Cocina Italiana</h3>
+              <p class="product-description">
+                Recetas tradicionales italianas, 200 páginas
+              </p>
+              <div class="product-details">
+                <span class="product-price">$29.99</span>
+                <span class="product-stock">Stock: 25</span>
+              </div>
+              <div class="product-category">
+                <span class="category-badge">📚 Libros</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
 
-        <!-- Sección de Configuración -->
-        <main class="main-content" id="configuracion-section" style="display: none;">
-            <div class="section-header">
-                <h1>⚙️ Configuración</h1>
+      <!-- Sección de Pedidos -->
+      <main class="main-content" id="pedidos-section" style="display: none">
+        <div class="section-header">
+          <h1>📦 Pedidos</h1>
+          <div class="order-filters">
+            <select id="statusFilter" onchange="filterOrders()">
+              <option value="all">Todos los estados</option>
+              <option value="pending">⏳ Pendientes</option>
+              <option value="processing">🚚 En proceso</option>
+              <option value="completed">✅ Completados</option>
+              <option value="cancelled">❌ Cancelados</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="orders-table-container">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Producto</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Total</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Pedido 1 - Pendiente -->
+              <tr class="order-row pending">
+                <td>
+                  <div class="client-cell">
+                    <div class="client-avatar-small">ML</div>
+                    <div class="client-info">
+                      <span class="client-name">María López</span>
+                      <span class="client-contact">maria@email.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="product-cell">
+                    <span class="product-name">Zapatos Deportivos Nike</span>
+                    <span class="product-quantity">Cantidad: 1</span>
+                  </div>
+                </td>
+                <td>15 Dic, 10:30</td>
+                <td>
+                  <span class="status-badge pending">⏳ Pendiente</span>
+                </td>
+                <td>$89.99</td>
+                <td>
+                  <div class="action-buttons">
+                    <button
+                      class="btn-success btn-sm"
+                      onclick="markAsProcessing(7842)"
+                    >
+                      ✅ Aceptar
+                    </button>
+                    <button
+                      class="btn-danger btn-sm"
+                      onclick="cancelOrder(7842)"
+                    >
+                      ❌ Rechazar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Pedido 2 - En proceso -->
+              <tr class="order-row processing">
+                <td>
+                  <div class="client-cell">
+                    <div class="client-avatar-small">CR</div>
+                    <div class="client-info">
+                      <span class="client-name">Carlos Rodríguez</span>
+                      <span class="client-contact">carlos@email.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="product-cell">
+                    <span class="product-name">Camiseta Básica Negra ×2</span>
+                    <span class="product-quantity">Cantidad: 2</span>
+                  </div>
+                </td>
+                <td>14 Dic, 16:45</td>
+                <td>
+                  <span class="status-badge processing">🚚 En proceso</span>
+                </td>
+                <td>$49.98</td>
+                <td>
+                  <div class="action-buttons">
+                    <button
+                      class="btn-primary btn-sm"
+                      onclick="markAsDelivered(7841)"
+                    >
+                      📦 Marcar entregado
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Pedido 3 - Completado -->
+              <tr class="order-row completed">
+                <td>
+                  <div class="client-cell">
+                    <div class="client-avatar-small">AS</div>
+                    <div class="client-info">
+                      <span class="client-name">Ana Sánchez</span>
+                      <span class="client-contact">ana@email.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="product-cell">
+                    <span class="product-name">Auriculares Bluetooth</span>
+                    <span class="product-quantity">Cantidad: 1</span>
+                  </div>
+                </td>
+                <td>13 Dic, 11:20</td>
+                <td>
+                  <span class="status-badge completed">✅ Completado</span>
+                </td>
+                <td>$129.99</td>
+                <td>
+                  <div class="action-buttons">
+                    <button
+                      class="btn-secondary btn-sm"
+                      onclick="viewOrderDetails(7840)"
+                    >
+                      👁️ Ver
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Pedido 4 - Pendiente -->
+              <tr class="order-row pending">
+                <td>
+                  <div class="client-cell">
+                    <div class="client-avatar-small">JR</div>
+                    <div class="client-info">
+                      <span class="client-name">Juan Ramírez</span>
+                      <span class="client-contact">juan@email.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="product-cell">
+                    <span class="product-name">Libro de Cocina Italiana</span>
+                    <span class="product-quantity">Cantidad: 1</span>
+                  </div>
+                </td>
+                <td>15 Dic, 09:15</td>
+                <td>
+                  <span class="status-badge pending">⏳ Pendiente</span>
+                </td>
+                <td>$29.99</td>
+                <td>
+                  <div class="action-buttons">
+                    <button
+                      class="btn-success btn-sm"
+                      onclick="markAsProcessing(7839)"
+                    >
+                      ✅ Aceptar
+                    </button>
+                    <button
+                      class="btn-danger btn-sm"
+                      onclick="cancelOrder(7839)"
+                    >
+                      ❌ Rechazar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+      <!-- Sección de Reputación de Clientes -->
+      <main class="main-content" id="reputacion-section" style="display: none">
+        <div class="section-header">
+          <h1>⭐ Reputación de Clientes</h1>
+          <div class="reputation-filters">
+            <select id="trustFilter" onchange="filterClients()">
+              <option value="all">Todos los clientes</option>
+              <option value="high">🟢 Confiables</option>
+              <option value="medium">🟡 Regulares</option>
+              <option value="low">🔴 Riesgo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="reputation-stats">
+          <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-info">
+              <h3>Total Clientes</h3>
+              <span class="stat-number">47</span>
             </div>
-            
-            <div class="settings-grid">
-                <div class="setting-card">
-                    <h3>👤 Perfil de Tienda</h3>
-                    <p>Configura la información pública de tu tienda</p>
-                    <button class="btn-primary" onclick="openStoreSettings()">Configurar</button>
-                </div>
-                
-                <div class="setting-card">
-                    <h3>🚚 Métodos de Envío</h3>
-                    <p>Gestiona tus opciones de entrega y costos</p>
-                    <button class="btn-primary" onclick="openShippingSettings()">Gestionar</button>
-                </div>
-                
-                <div class="setting-card">
-                    <h3>💳 Métodos de Pago</h3>
-                    <p>Configura cómo recibir pagos</p>
-                    <button class="btn-primary" onclick="openPaymentSettings()">Configurar</button>
-                </div>
-                
-                <div class="setting-card">
-                    <h3>🔔 Notificaciones</h3>
-                    <p>Controla las notificaciones que recibes</p>
-                    <button class="btn-primary" onclick="openNotificationSettings()">Gestionar</button>
-                </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🟢</div>
+            <div class="stat-info">
+              <h3>Clientes Confiables</h3>
+              <span class="stat-number">32</span>
             </div>
-        </main>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-info">
+              <h3>Rating Promedio</h3>
+              <span class="stat-number">4.6</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="clients-reputation-list">
+          <!-- Cliente Confiable -->
+          <div class="client-reputation-card high-trust">
+            <div class="client-main-info">
+              <div class="client-avatar">ML</div>
+              <div class="client-details">
+                <h3 class="client-name">María López</h3>
+                <div class="client-stats">
+                  <span class="purchases">12 compras</span>
+                  <span class="positive-rate">92% positivas</span>
+                </div>
+              </div>
+              <div class="trust-indicator">
+                <span class="trust-level high">🟢 Confiable</span>
+                <span class="trust-percentage">95%</span>
+              </div>
+            </div>
+            <div class="client-additional-info">
+              <div class="info-item">
+                <span class="info-label">Última compra:</span>
+                <span class="info-value">15 Dic, 2024</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Total gastado:</span>
+                <span class="info-value">$1,245.50</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Comportamiento:</span>
+                <span class="info-value positive">✅ Siempre recibe</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cliente Regular -->
+          <div class="client-reputation-card medium-trust">
+            <div class="client-main-info">
+              <div class="client-avatar">JR</div>
+              <div class="client-details">
+                <h3 class="client-name">José Ramírez</h3>
+                <div class="client-stats">
+                  <span class="purchases">5 compras</span>
+                  <span class="positive-rate">65% positivas</span>
+                </div>
+              </div>
+              <div class="trust-indicator">
+                <span class="trust-level medium">🟡 Regular</span>
+                <span class="trust-percentage">68%</span>
+              </div>
+            </div>
+            <div class="client-additional-info">
+              <div class="info-item">
+                <span class="info-label">Última compra:</span>
+                <span class="info-value">10 Dic, 2024</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Total gastado:</span>
+                <span class="info-value">$320.75</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Comportamiento:</span>
+                <span class="info-value warning">⚠️ 1 entrega fallida</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cliente Riesgo -->
+          <div class="client-reputation-card low-trust">
+            <div class="client-main-info">
+              <div class="client-avatar">PG</div>
+              <div class="client-details">
+                <h3 class="client-name">Pedro Gómez</h3>
+                <div class="client-stats">
+                  <span class="purchases">3 compras</span>
+                  <span class="positive-rate">33% positivas</span>
+                </div>
+              </div>
+              <div class="trust-indicator">
+                <span class="trust-level low">🔴 Riesgo</span>
+                <span class="trust-percentage">45%</span>
+              </div>
+            </div>
+            <div class="client-additional-info">
+              <div class="info-item">
+                <span class="info-label">Última compra:</span>
+                <span class="info-value">5 Dic, 2024</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Total gastado:</span>
+                <span class="info-value">$156.30</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Comportamiento:</span>
+                <span class="info-value negative">❌ 2 entregas fallidas</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cliente Confiable 2 -->
+          <div class="client-reputation-card high-trust">
+            <div class="client-main-info">
+              <div class="client-avatar">CR</div>
+              <div class="client-details">
+                <h3 class="client-name">Carlos Rodríguez</h3>
+                <div class="client-stats">
+                  <span class="purchases">8 compras</span>
+                  <span class="positive-rate">88% positivas</span>
+                </div>
+              </div>
+              <div class="trust-indicator">
+                <span class="trust-level high">🟢 Confiable</span>
+                <span class="trust-percentage">92%</span>
+              </div>
+            </div>
+            <div class="client-additional-info">
+              <div class="info-item">
+                <span class="info-label">Última compra:</span>
+                <span class="info-value">14 Dic, 2024</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Total gastado:</span>
+                <span class="info-value">$890.25</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Comportamiento:</span>
+                <span class="info-value positive">✅ Puntual en pagos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Sección de Configuración -->
+      <main
+        class="main-content"
+        id="configuracion-section"
+        style="display: none"
+      >
+        <div class="section-header">
+          <h1>⚙️ Configuración</h1>
+        </div>
+
+        <div class="settings-grid">
+          <div class="setting-card">
+            <h3>👤 Perfil de Tienda</h3>
+            <p>Configura la información pública de tu tienda</p>
+            <button class="btn-primary" onclick="openStoreSettings()">
+              Configurar
+            </button>
+          </div>
+
+          <div class="setting-card">
+            <h3>🚚 Métodos de Envío</h3>
+            <p>Gestiona tus opciones de entrega y costos</p>
+            <button class="btn-primary" onclick="openShippingSettings()">
+              Gestionar
+            </button>
+          </div>
+
+          <div class="setting-card">
+            <h3>💳 Métodos de Pago</h3>
+            <p>Configura cómo recibir pagos</p>
+            <button class="btn-primary" onclick="openPaymentSettings()">
+              Configurar
+            </button>
+          </div>
+
+          <div class="setting-card">
+            <h3>🔔 Notificaciones</h3>
+            <p>Controla las notificaciones que recibes</p>
+            <button class="btn-primary" onclick="openNotificationSettings()">
+              Gestionar
+            </button>
+          </div>
+        </div>
+      </main>
     </div>
 
     <!-- Modal para Agregar/Editar Producto -->
     <div id="productModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>➕ Agregar Nuevo Producto</h2>
-                <button class="close-modal" onclick="closeProductModal()">×</button>
-            </div>
-            
-            <form id="productForm" class="modal-form">
-                <div class="form-group">
-                    <label>Nombre del Producto *</label>
-                    <input type="text" id="productName" placeholder="Ej: Zapatos Deportivos Nike" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Descripción *</label>
-                    <textarea id="productDescription" placeholder="Describe tu producto..." rows="3" required></textarea>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Precio ($) *</label>
-                        <input type="number" id="productPrice" step="0.01" placeholder="0.00" min="0" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Stock *</label>
-                        <input type="number" id="productStock" placeholder="0" min="0" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Categoría *</label>
-                    <select id="productCategory" required>
-                        <option value="">Seleccionar categoría</option>
-                        <option value="ropa">👕 Ropa</option>
-                        <option value="calzado">👟 Calzado</option>
-                        <option value="electronica">📱 Electrónica</option>
-                        <option value="hogar">🏠 Hogar</option>
-                        <option value="deportes">⚽ Deportes</option>
-                        <option value="libros">📚 Libros</option>
-                        <option value="otros">📦 Otros</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Fotos del Producto</label>
-                    <div class="file-upload-area" id="photoUpload">
-                        <input type="file" id="productPhotos" multiple accept="image/*" style="display: none;">
-                        <div class="upload-placeholder">
-                            <span class="upload-icon">📷</span>
-                            <p>Haz clic para subir fotos</p>
-                            <small>Máx. 5 imágenes • PNG, JPG</small>
-                        </div>
-                        <div class="upload-preview" id="uploadPreview"></div>
-                    </div>
-                </div>
-
-                <div class="form-actions">
-                    <button type="button" class="btn-secondary" onclick="closeProductModal()">Cancelar</button>
-                    <button type="submit" class="btn-primary">Guardar Producto</button>
-                </div>
-            </form>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>➕ Agregar Nuevo Producto</h2>
+          <button class="close-modal" onclick="closeProductModal()">×</button>
         </div>
+
+        <form id="productForm" class="modal-form">
+          <div class="form-group">
+            <label>Nombre del Producto *</label>
+            <input
+              type="text"
+              id="productName"
+              placeholder="Ej: Zapatos Deportivos Nike"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Descripción *</label>
+            <textarea
+              id="productDescription"
+              placeholder="Describe tu producto..."
+              rows="3"
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Precio ($) *</label>
+              <input
+                type="number"
+                id="productPrice"
+                step="0.01"
+                placeholder="0.00"
+                min="0"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Stock *</label>
+              <input
+                type="number"
+                id="productStock"
+                placeholder="0"
+                min="0"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Categoría *</label>
+            <select id="productCategory" required>
+              <option value="">Seleccionar categoría</option>
+              <option value="ropa">👕 Ropa</option>
+              <option value="calzado">👟 Calzado</option>
+              <option value="electronica">📱 Electrónica</option>
+              <option value="hogar">🏠 Hogar</option>
+              <option value="deportes">⚽ Deportes</option>
+              <option value="libros">📚 Libros</option>
+              <option value="otros">📦 Otros</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Fotos del Producto</label>
+            <div class="file-upload-area" id="photoUpload">
+              <input
+                type="file"
+                id="productPhotos"
+                multiple
+                accept="image/*"
+                style="display: none"
+              />
+              <div class="upload-placeholder">
+                <span class="upload-icon">📷</span>
+                <p>Haz clic para subir fotos</p>
+                <small>Máx. 5 imágenes • PNG, JPG</small>
+              </div>
+              <div class="upload-preview" id="uploadPreview"></div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button
+              type="button"
+              class="btn-secondary"
+              onclick="closeProductModal()"
+            >
+              Cancelar
+            </button>
+            <button type="submit" class="btn-primary">Guardar Producto</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- Modal para Confirmar Entrega -->
     <div id="deliveryModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>📦 Confirmar Entrega</h2>
-                <button class="close-modal" onclick="closeDeliveryModal()">×</button>
-            </div>
-            
-            <div class="modal-body">
-                <p>¿El cliente recibió correctamente el pedido?</p>
-                
-                <div class="rating-options">
-                    <button class="rating-btn positive" onclick="selectRating('positive')">
-                        <span class="rating-icon">👍</span>
-                        <span>Positiva</span>
-                    </button>
-                    <button class="rating-btn negative" onclick="selectRating('negative')">
-                        <span class="rating-icon">👎</span>
-                        <span>Negativa</span>
-                    </button>
-                </div>
-
-                <div class="comment-section" id="commentSection" style="display: none;">
-                    <label>Comentario (opcional)</label>
-                    <textarea id="deliveryComment" placeholder="Agregar comentario sobre la entrega..." rows="3"></textarea>
-                </div>
-            </div>
-
-            <div class="modal-actions">
-                <button type="button" class="btn-secondary" onclick="closeDeliveryModal()">Cancelar</button>
-                <button type="button" class="btn-primary" id="confirmDeliveryBtn" onclick="confirmDelivery()" disabled>
-                    Confirmar Entrega
-                </button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>📦 Confirmar Entrega</h2>
+          <button class="close-modal" onclick="closeDeliveryModal()">×</button>
         </div>
+
+        <div class="modal-body">
+          <p>¿El cliente recibió correctamente el pedido?</p>
+
+          <div class="rating-options">
+            <button
+              class="rating-btn positive"
+              onclick="selectRating('positive')"
+            >
+              <span class="rating-icon">👍</span>
+              <span>Positiva</span>
+            </button>
+            <button
+              class="rating-btn negative"
+              onclick="selectRating('negative')"
+            >
+              <span class="rating-icon">👎</span>
+              <span>Negativa</span>
+            </button>
+          </div>
+
+          <div
+            class="comment-section"
+            id="commentSection"
+            style="display: none"
+          >
+            <label>Comentario (opcional)</label>
+            <textarea
+              id="deliveryComment"
+              placeholder="Agregar comentario sobre la entrega..."
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="btn-secondary"
+            onclick="closeDeliveryModal()"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            class="btn-primary"
+            id="confirmDeliveryBtn"
+            onclick="confirmDelivery()"
+            disabled
+          >
+            Confirmar Entrega
+          </button>
+        </div>
+      </div>
     </div>
 
     <script src="dashboard_vendedor.js"></script>
-</body>
+  </body>
 </html>
